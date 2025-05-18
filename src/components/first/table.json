@@ -1,0 +1,85 @@
+{
+  "tableData": [
+    {
+      "name": "Urine Drug Screen",
+      "data": [
+        24,
+        65,
+        345,
+        2345
+      ]
+    },
+    {
+      "name": "Oral Fluid Drug Screen",
+      "data": [
+        15,
+        75,
+        205,
+        1365
+      ]
+    },
+    {
+      "name": "Urine Drug Test",
+      "data": [
+        12,
+        75,
+        125,
+        2045
+      ]
+    },
+    {
+      "name": "Breath Alcohol Test",
+      "data": [
+        16,
+        69,
+        152,
+        1892
+      ]
+    },
+    {
+      "name": "Observed",
+      "data": [
+        45,
+        95,
+        536,
+        4352
+      ]
+    },
+    {
+      "name": "Witnessed",
+      "data": [
+        53,
+        90,
+        872,
+        1067
+      ]
+    },
+    {
+      "name": "Single",
+      "data": [
+        14,
+        45,
+        345,
+        1356
+      ]
+    },
+    {
+      "name": "Multiple",
+      "data": [
+        10,
+        95,
+        299,
+        2312
+      ]
+    },
+    {
+      "name": "Renewal",
+      "data": [
+        17,
+        94,
+        345,
+        1873
+      ]
+    }
+  ]
+}

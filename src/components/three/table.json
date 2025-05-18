@@ -1,0 +1,40 @@
+{
+  "tableData": [
+    {
+      "name": "Rapid Urine Drug S Average",
+      "data": [32, 78, 456, 1145]
+    },
+    {
+      "name": "Rapid Urine Drug S Shortest",
+      "data": [45, 81, 523, 1298]
+    },
+    {
+      "name": "Rapid Urine Drug S Longest",
+      "data": [67, 83, 589, 1367]
+    },
+    {
+      "name": "Saliva Drug Screen Average",
+      "data": [28, 85, 645, 1412]
+    },
+    {
+      "name": "Saliva Drug Screen Shortest",
+      "data": [53, 69, 734, 1245]
+    },
+    {
+      "name": "Saliva Drug Screen Longest",
+      "data": [71, 87, 867, 1356]
+    },
+    {
+      "name": "Urine Drug Test Average",
+      "data": [35, 82, 678, 1467]
+    },
+    {
+      "name": "Urine Drug Test Shortest",
+      "data": [43, 76, 791, 1178]
+    },
+    {
+      "name": "Urine Drug Test Longest",
+      "data": [64, 89, 823, 1434]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "tableData": [
+    {
+      "name": "Rail (Cat 1)",
+      "data": [12, 35, 178, 1123]
+    },
+    {
+      "name": "Rail (Cat 2)",
+      "data": [14, 42, 256, 1167]
+    },
+    {
+      "name": "Rail (Cat 3)",
+      "data": [17, 48, 389, 1234]
+    },
+    {
+      "name": "Court Medical",
+      "data": [21, 53, 445, 1289]
+    },
+    {
+      "name": "Dribving Medical",
+      "data": [25, 57, 567, 1345]
+    },
+    {
+      "name": "Incident Medical",
+      "data": [31, 64, 678, 1378]
+    },
+    {
+      "name": "MRO",
+      "data": [35, 72, 789, 1412]
+    },
+    {
+      "name": "In-House (Pre Em)",
+      "data": [42, 86, 845, 1456]
+    },
+    {
+      "name": "Lab (Pre Em)",
+      "data": [46, 93, 912, 1478]
+    },
+    {
+      "name": "Other",
+      "data": [49, 97, 945, 1499]
+    }
+  ]
+}

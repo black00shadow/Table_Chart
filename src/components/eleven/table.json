@@ -1,0 +1,106 @@
+{
+  "tableData": [
+    [
+      {
+        "time": "today",
+        "info": [
+          { "name": "Negative AMP", "data": [32, 78, 456, 1234] },
+          { "name": "Negative BZO", "data": [45, 91, 623, 1345] },
+          { "name": "Negative COC", "data": [67, 43, 789, 1456] }
+        ]
+      },
+      {
+        "time": "week",
+        "info": [
+          { "name": "Negative AMP", "data": [45, 92, 567, 1345] },
+          { "name": "Negative BZO", "data": [58, 103, 734, 1456] },
+          { "name": "Negative COC", "data": [72, 85, 890, 1567] }
+        ]
+      },
+      {
+        "time": "month",
+        "info": [
+          { "name": "Negative AMP", "data": [89, 156, 789, 1432] },
+          { "name": "Negative BZO", "data": [92, 178, 856, 1543] },
+          { "name": "Negative COC", "data": [105, 167, 923, 1654] }
+        ]
+      },
+      {
+        "time": "year",
+        "info": [
+          { "name": "Negative AMP", "data": [234, 567, 1234, 1432] },
+          { "name": "Negative BZO", "data": [345, 678, 1345, 1543] },
+          { "name": "Negative COC", "data": [456, 789, 1456, 1654] }
+        ]
+      }
+    ],
+    [
+      {
+        "time": "today",
+        "info": [
+          { "name": "Negative MET", "data": [28, 85, 345, 1289] },
+          { "name": "Negative OPI", "data": [53, 69, 234, 1378] },
+          { "name": "Negative OXY", "data": [91, 37, 567, 1467] }
+        ]
+      },
+      {
+        "time": "week",
+        "info": [
+          { "name": "Negative MET", "data": [42, 98, 456, 1378] },
+          { "name": "Negative OPI", "data": [67, 82, 345, 1467] },
+          { "name": "Negative OXY", "data": [104, 50, 678, 1556] }
+        ]
+      },
+      {
+        "time": "month",
+        "info": [
+          { "name": "Negative MET", "data": [85, 167, 678, 1467] },
+          { "name": "Negative OPI", "data": [98, 145, 567, 1556] },
+          { "name": "Negative OXY", "data": [123, 89, 789, 1645] }
+        ]
+      },
+      {
+        "time": "year",
+        "info": [
+          { "name": "Negative MET", "data": [223, 578, 1289, 1467] },
+          { "name": "Negative OPI", "data": [334, 689, 1378, 1556] },
+          { "name": "Negative OXY", "data": [445, 798, 1467, 1645] }
+        ]
+      }
+    ],
+    [
+      {
+        "time": "today",
+        "info": [
+          { "name": "Negative THC", "data": [35, 82, 412, 1245] },
+          { "name": "Synthetic Cannabinoids", "data": [48, 73, 528, 1367] },
+          { "name": "Synthetic Cathinones", "data": [63, 95, 634, 1478] }
+        ]
+      },
+      {
+        "time": "week",
+        "info": [
+          { "name": "Negative THC", "data": [48, 95, 523, 1334] },
+          { "name": "Synthetic Cannabinoids", "data": [61, 86, 639, 1456] },
+          { "name": "Synthetic Cathinones", "data": [76, 108, 745, 1567] }
+        ]
+      },
+      {
+        "time": "month",
+        "info": [
+          { "name": "Negative THC", "data": [92, 178, 745, 1423] },
+          { "name": "Synthetic Cannabinoids", "data": [105, 156, 856, 1545] },
+          { "name": "Synthetic Cathinones", "data": [118, 189, 967, 1656] }
+        ]
+      },
+      {
+        "time": "year",
+        "info": [
+          { "name": "Negative THC", "data": [245, 589, 1245, 1423] },
+          { "name": "Synthetic Cannabinoids", "data": [356, 698, 1367, 1545] },
+          { "name": "Synthetic Cathinones", "data": [467, 807, 1478, 1656] }
+        ]
+      }
+    ]
+  ]
+}
