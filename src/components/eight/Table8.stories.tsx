@@ -5,7 +5,8 @@ import React, { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import styled from 'styled-components'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell as RechartsCell } from 'recharts'
-import { within, userEvent, expect } from '@storybook/test'
+import { within, userEvent } from '@storybook/testing-library'
+import { expect } from '@storybook/jest'
 
 const meta: Meta<any> = {
   title: 'Dashboard/Table08',
@@ -22,12 +23,16 @@ const meta: Meta<any> = {
 export default meta
 type Story = StoryObj<any>
 
+interface ViewToggleButtonProps {
+  active: boolean;
+}
+
 interface TableData {
-  category: string
-  today: number
-  week: number
-  month: number
-  year: number
+  category: string;
+  today: number;
+  week: number;
+  month: number;
+  year: number;
 }
 
 const mockData: TableData[] = [
@@ -234,18 +239,18 @@ const ViewToggleContainer = styled.div`
   border-radius: 4px;
 `
 
-const ViewToggleButton = styled.button<{ active: boolean }>`
+const ViewToggleButton = styled.button<ViewToggleButtonProps>`
   padding: 6px 12px;
   border: none;
   border-radius: 4px;
-  background: ${props => props.active ? 'white' : 'transparent'};
-  color: ${props => props.active ? '#1e90ff' : 'white'};
+  background: ${(props: ViewToggleButtonProps) => props.active ? 'white' : 'transparent'};
+  color: ${(props: ViewToggleButtonProps) => props.active ? '#1e90ff' : 'white'};
   cursor: pointer;
   font-size: 14px;
   transition: all 0.3s ease;
 
   &:hover {
-    background: ${props => props.active ? 'white' : 'rgba(255, 255, 255, 0.2)'};
+    background: ${(props: ViewToggleButtonProps) => props.active ? 'white' : 'rgba(255, 255, 255, 0.2)'};
   }
 `
 
