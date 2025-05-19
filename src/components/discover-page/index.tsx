@@ -10,25 +10,23 @@ import Icon, {
 } from '@ant-design/icons'
 import YearView from '../year-view'
 import ChartView from './chart'
-import TableView from './index'
+import TableView from './table_view'
 import { getData } from '@/api/getData'
 
-const titleIcon = require('@/assets/img/4.png')
-
+import titleIcon from '@/assets/img/4.png'
 import stickyImage from '@/assets/img/sticky.png'
 import tableIcon from '@/assets/img/table.png'
 import chartIcon from '@/assets/img/chart.png'
+import { TableType } from '@/mock/modules/mockData'
+import { TableData } from './table'
 
 export const getImageSize = (imageSrc:string) => {
-  // return useMemo(() => {
       const img = new Image();
-      img.src = imageSrc;
+      img.src = imageSrc
       const width = img.width;
       const height = img.height;
       return {width, height};
 }
-
-const { width: titleIconWidth , height: titleIconHeight } = getImageSize(titleIcon);
 
 const { width: stickyImageWidth, height: stickyImageHeight} = getImageSize(stickyImage);
 
@@ -162,16 +160,31 @@ const DateRangeContainer = styled.div`
     width: 240px;
   }
 `
-const TitleIcon = styled.div`
-  width: ${titleIconWidth}px;
-  height: ${titleIconHeight}px;
-  background-image: url(${titleIcon});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-  margin-right: 10px;
-`
+// const TitleIcon = styled.div`
+// width: ${titleIconWidth}px;
+// height: ${titleIconHeight}px;
+// background-image: url(${titleIcon});
+// background-size: contain;
+// background-repeat: no-repeat;
+// background-position: center;
+// cursor: pointer;
+// margin-right: 10px;
+// `
+const TitleIcon = ({iconUrl}:any) => {
+
+  const { width, height } = getImageSize(iconUrl);
+  const IconTpl = styled.div`
+    width: ${width}px;
+    height: ${height}px;
+    background-image: url(${iconUrl});
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    margin-right: 10px;
+  `;
+  return <IconTpl/>
+} 
 const Sticky = styled.div`
   width: ${stickyImageWidth / 2}px;
   height: ${stickyImageHeight / 2}px;
@@ -220,21 +233,31 @@ const IconBox = styled.div<{ $isActive?: boolean }>`
 `
 type TimeRangeType = 'today' | 'currentWeek' | 'currentMonth' | 'currentYear'
 
-const Discover: React.FC = () => {
+export interface ChartContent {
+  content: string;
+  dataName: string[];
+  series: any[];
+}
+
+export interface DiscoverData{
+  iconUrl: string;
+  title: string;
+  collectors: string[];
+  reqType: TableType;
+  resType: string;
+  contentData: ChartContent[];
+  yearlyData: number[][][];
+}
+
+const Discover: React.FC<DiscoverData> = (data: DiscoverData) => {
+
   const [displayMode, setDisplayMode] = useState<'table' | 'chart'>('table')
   const [timeRange, setTimeRange] = useState<TimeRangeType>('today')
   const [dateRange, setDateRange] = useState<[string, string] | null>(null)
   const chartRef = useRef<HTMLDivElement>(null)
   const chartInstance = useRef<echarts.ECharts | null>(null)
-  const [tableData, setTableData] = useState<
-    {
-      time: string
-      info: {
-        name: string
-        data: number[]
-      }[]
-    }[][]
-  >([])
+  const [tableData, setTableData] = useState<TableData>([])
+  const [contentNames, setcontentNames] = useState<string[]>([])
 
   useEffect(() => {
     if (displayMode === 'chart' && chartRef.current) {
@@ -251,6 +274,10 @@ const Discover: React.FC = () => {
     }
   }, [displayMode])
   useEffect(() => {
+    data.contentData.map((item) => {
+      setcontentNames((prev) => [...prev, item.content])
+    })
+
     loadData()
   }, [])
   const onChangeTable = (
@@ -266,17 +293,18 @@ const Discover: React.FC = () => {
   }
   const loadData = async () => {
     const res = await getData({
-      type: 'seven'
+      type: data.reqType
     })
-    console.log(res);
-    setTableData(res.data.PatientTime)
+    console.log(res)
+    setTableData(res.data[data.resType])
   }
+
   return (
     <Container>
       <MainContent>
         <Header>
-          <TitleIcon />
-          <PageTitle>Urine Drug Test Results (Laboratory Test)</PageTitle>
+          <TitleIcon iconUrl={data.iconUrl} />
+          <PageTitle>{data.title}</PageTitle>
           <Options>
             <Space>
               {/* <Button
@@ -402,20 +430,15 @@ const Discover: React.FC = () => {
         {displayMode === 'table' ? (
           <TableView
             timeRange={timeRange}
+            collectors={data.collectors}
+            contentNames={contentNames}
             tableData={tableData}
+            yearlyData={data.yearlyData}
             onChangeTable={onChangeTable}
           />
         ) : (
-          <ChartView timeRange={timeRange} tableData={tableData} />
+          <ChartView timeRange={timeRange} tableData={tableData} contentData={data.contentData}/>
         )}
-
-        {/* {
-          displayMode === 'table' ? (
-            <TableMode>ee</TableMode>
-          ) : (
-            <ChartMode>ff</ChartMode>
-          )
-        } */}
       </MainContent>
     </Container>
   )

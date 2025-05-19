@@ -15,6 +15,7 @@ import TwelveView from '@/components/twelve/main'
 import ThirteenView from '@/components/thirteen/main'
 import FourteenView from '@/components/fourteen/main'
 import FiveteenView from '@/components/fiveteen/main'
+import DiscoverPage, { DiscoverData } from '../discover-page'
 
 // 主容器
 const AppContainer = styled.div`
@@ -248,6 +249,522 @@ const Icon = ({ type }: { type: string }) => {
   return <MenuIcon>{getIcon()}</MenuIcon>
 }
 
+const DEFAULT_DATA:DiscoverData[] = [
+  {
+    iconUrl: require('@/assets/img/time.png'),
+    title:'Patient Time',
+    collectors: ['Rusira Rusira'],
+    reqType: 'three',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: 'All Tests',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Rapid Urine Drug S.',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Saliva Drug Screen',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Urine Drug Test',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Breath Alcohol Test',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ],
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ],
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ],
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ],
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ]
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/time.png'),
+    title:'Test Time',
+    collectors: ['All'],
+    reqType: 'four',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: 'All Tests',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Rapid Urine Drug S.',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Saliva Drug Screen',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Urine Drug Test',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Breath Alcohol Test',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ],
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ],
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ],
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ],
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ]
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/timing.png'),
+    title:'Test Categories',
+    collectors: [],
+    reqType: 'five',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: '',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [2300, 2300, 2300, 2300, 2300, 2300],
+        [3000, 3000, 3000, 3000, 3000, 3000],
+        [1200, 1200, 1200, 1200, 1200, 1200],
+        [2300, 2300, 2300, 2300, 2300, 2300],
+        [3000, 3000, 3000, 3000, 3000, 3000],
+        [1200, 1200, 1200, 1200, 1200, 1200],
+        [2300, 2300, 2300, 2300, 2300, 2300],
+        [3000, 3000, 3000, 3000, 3000, 3000],
+        [1200, 1200, 1200, 1200, 1200, 1200],
+        [2300, 2300, 2300, 2300, 2300, 2300],
+        [3000, 3000, 3000, 3000, 3000, 3000],
+        [1200, 1200, 1200, 1200, 1200, 1200],
+      ]
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/6.png'),
+    title:'Rapid Urine Drug Screen Results',
+    collectors: [],
+    reqType: 'six',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: 'Negative',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Non Negative',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Invalid',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Sent to Lab (RFT)',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Refusal',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9222, 1022, 4411, 1244, 3050, 4000],
+        [9111, 1110, 1144, 1442, 3040, 4000],
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000],
+      ],
+      [
+        [9222, 1022, 4411, 1244, 3050, 4000],
+        [9111, 1110, 1144, 1442, 3040, 4000],
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000],
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000],
+      ]
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/6.png'),
+    title:'Urine Drug Test Results (Laboratory Test)',
+    collectors: [],
+    reqType: 'seven',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: 'Sent to Lab (RFT)',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Refusal',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9222, 1022, 4411, 1244, 3050, 4000],
+        [9, 10, 11, 12, 300, 4000]
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [2239, 4510, 1111, 1276, 3050, 4000]
+      ]
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/6.png'),
+    title:'Breath Alcohol Test Results',
+    collectors: [],
+    reqType: 'eight',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: 'Negative',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Non Negative',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Invalid',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000]
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000]
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000]
+      ]
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/6.png'),
+    title:'Drug Classes - Negative Results',
+    collectors: [],
+    reqType: 'nine',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: '',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Synthetic',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9222, 1022, 4411, 1244, 3050, 4000],
+        [9111, 1110, 1144, 1442, 3040, 4000],
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000]
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000]
+      ] 
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/6.png'),
+    title:'Drug Classes - Non Negative Results',
+    collectors: [],
+    reqType: 'ten',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: '',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Synthetic',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9222, 1022, 4411, 1244, 3050, 4000],
+        [9111, 1110, 1144, 1442, 3040, 4000],
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000]
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000]
+      ] 
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/6.png'),
+    title:'Drug Classes - Invalid Results',
+    collectors: [],
+    reqType: 'eleven',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: '',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Synthetic',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9222, 1022, 4411, 1244, 3050, 4000],
+        [9111, 1110, 1144, 1442, 3040, 4000],
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000]
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000]
+      ] 
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/2.png'),
+    title:'Collector Performance',
+    collectors: [],
+    reqType: 'twelve',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: '',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Collectors',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000]
+      ],
+      [
+        [9222, 1022, 4411, 1244, 3050, 4000],
+        [9111, 1110, 1144, 1442, 3040, 4000],
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000]
+      ]
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/2.png'),
+    title:'Collector Rankings',
+    collectors: [],
+    reqType: 'thirteen',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: '',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000]
+      ]
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/3.png'),
+    title:'PatientTime',
+    collectors: [],
+    reqType: 'fourteen',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: 'Sex',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Medication',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Attendance',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000]
+      ],
+      [
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000]
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [9111, 1045, 1441, 1892, 3500, 4000],
+        [2239, 4510, 1111, 1276, 3050, 4000],
+        [2239, 4510, 1111, 1276, 3050, 4000]
+      ]
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/3.png'),
+    title:'Patient Communication',
+    collectors: [],
+    reqType: 'fiveteen',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: 'Result Reports',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Attendance Cert.',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000],
+        [9, 10, 11, 12, 300, 4000]
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [2239, 4510, 1111, 1276, 3050, 4000],
+        [2239, 4510, 1111, 1276, 3050, 4000]
+      ]
+    ]
+  }
+]
+
 // 主组件
 const SAClinicsDashboard: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState('dashboard')
@@ -330,19 +847,25 @@ const SAClinicsDashboard: React.FC = () => {
         </Sidebar>
         <MainContent>
           <FirstView timeRange={timeRange} />
-          <ThreeView />
-          <FourView />
-          <FiveView />
-          <SixView />
-          <SevenView />
-          <EightView />
-          <NineView />
-          <TenView />
-          <ElevenView />
-          <TwelveView />
-          <ThirteenView />
-          <FourteenView />
-          <FiveteenView />
+          {
+            DEFAULT_DATA.map((data)=> <DiscoverPage {...data} key={data.reqType}/>)
+          }
+          {/* <DiscoverPage {...DEFAULT_DATA[2]}/> */}
+
+          {/* <ThreeView /> */}
+          {/* <FourView /> */}
+          {/* <FiveView /> */}
+          {/* <SixView /> */}
+          {/* <SevenView /> */}
+          {/* <DiscoverPage {...DEFAULT_DATA['seven']}/> */}
+          {/* <EightView /> */}
+          {/* <NineView /> */}
+          {/* <TenView /> */}
+          {/* <ElevenView /> */}
+          {/* <TwelveView /> */}
+          {/* <ThirteenView /> */}
+          {/* <FourteenView /> */}
+          {/* <FiveteenView /> */}
         </MainContent>
       </ContentContainer>
     </AppContainer>

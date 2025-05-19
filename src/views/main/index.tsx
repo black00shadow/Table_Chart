@@ -210,7 +210,7 @@ const Discover: React.FC = () => {
   return (
     <Container>
       <FirstView />
-      <SecondView />
+      {/* <SecondView /> */}
       {/* <ThreeView />
       <FourView />
       <FiveView />
