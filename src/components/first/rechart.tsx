@@ -859,7 +859,7 @@ const SAClinicsDashboard: React.FC = () => {
           </SidebarMenu>
         </Sidebar>
         <MainContent>
-          {/* <FirstView timeRange={timeRange} /> */}
+          <FirstView timeRange={timeRange} />
           {
             DEFAULT_DATA.map((data)=> <DiscoverPage {...data} key={data.reqType}/>)
           }
