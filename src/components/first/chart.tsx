@@ -18,7 +18,7 @@ const PageContainer = styled.div`
 `
 
 const LeftPanel = styled.div`
-  width: 24%;
+  width: 22%;
   // flex-shrink: 0;
   height: fit-content;
 `
@@ -28,22 +28,24 @@ const RightPanel = styled.div`
   // width: calc(100% - 300px - 24px);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1%;
 `
 
 const Container = styled.div`
-  width: 300px;
+  width: 90%;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  // border-radius: 16px;
+  border: 1.5px solid #e0e0e0;
+  box-shadow: none;
+  padding: 24px 20px 20px 20px;
 `
 
 const Title = styled.div`
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
-  color: #000033;
-  margin-bottom: 16px;
+  color: #0A1766;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
 `
 
 const DateSection = styled.div`
@@ -60,14 +62,14 @@ const DateSelector = styled.div`
   align-items: center;
   justify-content: space-between;
   background: #fff;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 6px;
   padding: 4px 11px;
-
   .date-text {
-    font-size: 14px;
+    font-size: 15px;
+    color: #0A1766;
+    font-weight: 500;
   }
-
   .ant-btn {
     border: none;
     padding: 0 4px;
@@ -103,12 +105,14 @@ const DonutChart = styled.div`
 const TotalNumber = styled.div`
   position: absolute;
   text-align: center;
-
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   .number {
     font-size: 24px;
     font-weight: bold;
+    color: #222;
   }
-
   .label {
     font-size: 12px;
     color: #666;
@@ -125,21 +129,22 @@ const TestItem = styled.div<{ $color: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   .test-name {
-    color: white;
-    padding: 8px 12px;
-    border-radius: 4px;
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 5px;
     background: ${(props) => props.$color};
+    font-weight: 500;
+    font-size: 14px;
     flex: 1;
     margin-right: 12px;
+    letter-spacing: 0.2px;
   }
-
   .test-value {
     width: 60px;
     .ant-input-number {
       width: 50px;
-      border-radius: 4px;
+      border-radius: 6px;
       text-align: center;
       &:hover,
       &:focus {
@@ -162,31 +167,29 @@ const PatientItem = styled.div`
   align-items: center;
   margin-bottom: 12px;
   height: 32px;
-
   .label {
     display: flex;
     align-items: center;
     gap: 8px;
     width: 60px;
-    color: #666;
+    color: #0A1766;
+    font-weight: 500;
+    font-size: 14px;
   }
-
   .bar {
     flex: 1;
-    height: 16px;
+    height: 14px;
     background: #003366;
     margin: 0 12px;
-    border-radius: 2px;
+    border-radius: 7px;
     transition: all 0.3s ease;
   }
-
   .number {
     min-width: 40px;
     text-align: center;
-
     .ant-input-number {
       width: 50px;
-      border-radius: 4px;
+      border-radius: 6px;
       text-align: center;
       &:hover,
       &:focus {
@@ -200,18 +203,70 @@ const ChartContainer = styled.div`
   width: 100%;
   height: 400px;
   background: #fff;
-  border-radius: 8px;
+  // border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  // padding: 20px;
+  padding: 1% 0% 1% 1%
 `
 
 const ResultsChartContainer = styled.div`
   width: 100%;
   height: 425px;
   background: #fff;
-  border-radius: 8px;
+  // border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 20px 0px 20px 0px;
+`
+
+const ChartCard = styled.div`
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 0px;
+  padding: 1% 0px 0px 1%;
+  margin-bottom: 1%;
+  width: 100%;
+`;
+
+const ChartHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+`;
+
+const ChartTitle = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  color: #0A1766;
+  font-family: 'Inter', sans-serif;
+`;
+
+const ChartLegend = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 2%;
+  margin-bottom: 1%;
+  margin-left: 3%;
+`;
+
+const LegendItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #0A1766;
+`;
+
+const LegendColor = styled.span<{ color: string }>`
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: ${(props) => props.color};
+`;
+
+const CardTitleText = styled.div`
+  align-self:anchor-center;
 `
 
 interface TestData {
@@ -300,14 +355,7 @@ const ChartView: React.FC = () => {
 
       const option = {
         title: {
-          text: 'Tests Processed',
-          left: 0,
-          top: 0,
-          textStyle: {
-            fontSize: 16,
-            fontWeight: 'bold',
-            color: '#333'
-          }
+          show: false // We'll use our own styled title
         },
         tooltip: {
           trigger: 'axis',
@@ -315,28 +363,9 @@ const ChartView: React.FC = () => {
             type: 'none'
           }
         },
-        legend: {
-          data: [
-            'Total',
-            'Breath Alcohol Screen',
-            'Urine Drug Screen',
-            'Oral Fluid Drug Screen',
-            'Urine Drug Test',
-            'Oral Fluid Collection',
-            'Hair Drug Test'
-          ],
-          right: '10%',
-          top: 0,
-          textStyle: {
-            fontSize: 12,
-            color: '#666'
-          },
-          itemWidth: 12,
-          itemHeight: 12,
-          itemGap: 10
-        },
+        legend: { show: false }, // We'll use our own legend
         grid: {
-          top: 80,
+          top: 40,
           left: 40,
           right: 40,
           bottom: 20,
@@ -479,8 +508,127 @@ const ChartView: React.FC = () => {
     }
   }, [])
 
-  return <ChartContainer ref={chartRef} />
+  // Legend data
+  const legendData = [
+    { label: 'Total', color: '#000080' },
+    { label: 'Breath Alcohol Screen', color: '#003366' },
+    { label: 'Urine Drug Screen', color: '#0066cc' },
+    { label: 'Oral Fluid Drug Screen', color: '#99ccff' },
+    { label: 'Urine Drug Test', color: '#ccffff' },
+    { label: 'Oral Fluid Collection', color: '#99ffcc' },
+    { label: 'Hair Drug Test', color: '#ccccff' }
+  ];
+
+  return (
+    <ChartCard>
+      <ChartHeader>
+        <ChartTitle>Tests Processed</ChartTitle>
+        <div style={{ display: 'flex', gap: 2, marginRight: '5%' }}>
+          <CardTitleText>Location</CardTitleText>
+          <Select defaultValue="All" size="small" style={{ width: 100, marginRight: 8 }}>
+            <Select.Option value="All">All</Select.Option>
+          </Select>
+          <CardTitleText>Show</CardTitleText>
+          <Select defaultValue="Daily" size="small" style={{ width: 100 }}>
+            <Select.Option value="Daily">Daily</Select.Option>
+            <Select.Option value="Weekly">Weekly</Select.Option>
+            <Select.Option value="Monthly">Monthly</Select.Option>
+          </Select>
+        </div>
+      </ChartHeader>
+      <ChartLegend>
+        {legendData.map((item) => (
+          <LegendItem key={item.label}>
+            <LegendColor color={item.color} />
+            {item.label}
+          </LegendItem>
+        ))}
+      </ChartLegend>
+      <div style={{ width: '100%', height: 320 }}>
+        <div ref={chartRef} style={{ width: '100%', height: '100%' }} />
+      </div>
+    </ChartCard>
+  );
 }
+
+const ResultsCard = styled.div`
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  padding: 1% 0 0 1%;
+  margin-bottom: 24px;
+  width: 100%;
+`;
+
+const ResultsHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+`;
+
+const ResultsTitle = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  color: #0A1766;
+  font-family: 'Inter', sans-serif;
+`;
+
+const ResultsLegend = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 2%;
+  margin-bottom: 1%;
+  margin-left: 3%;
+`;
+
+const ResultsLegendItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #0A1766;
+`;
+
+const ResultsLegendColor = styled.span<{ color: string }>`
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: ${(props) => props.color};
+`;
+
+const ResultsChartsRow = styled.div`
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  justify-content: space-between;
+`;
+
+const SingleResultChart = styled.div`
+  flex: 1;
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 8px 0;
+  min-width: 0;
+`;
+
+const NavArrow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 100%;
+  cursor: pointer;
+  color: #b0b0b0;
+  font-size: 22px;
+  user-select: none;
+`;
 
 const TestResultsChart: React.FC = () => {
   const chartRef = useRef<HTMLDivElement>(null)
@@ -490,44 +638,53 @@ const TestResultsChart: React.FC = () => {
     {
       name: 'Rapid Urine Drug Screen',
       data: [
-        { type: 'Negative', value: 82, color: '#003366' },
+        { type: 'Negative', value: 82, color: '#8886b3' },
         { type: 'Non Negative', value: 37, color: '#FFA500' },
-        { type: 'Invalid', value: 20, color: '#87CEEB' },
-        { type: 'Sent to Lab', value: 49, color: '#98FB98' },
-        { type: 'Refusal', value: 10, color: '#1E90FF' }
+        { type: 'Invalid', value: 20, color: '#b3e6f7' },
+        { type: 'Sent to Lab', value: 49, color: '#aee9f7' },
+        { type: 'Refusal', value: 10, color: '#0074c2' }
       ]
     },
     {
       name: 'Saliva Drug Screen',
       data: [
-        { type: 'Negative', value: 79, color: '#003366' },
+        { type: 'Negative', value: 79, color: '#8886b3' },
         { type: 'Non Negative', value: 45, color: '#FFA500' },
-        { type: 'Invalid', value: 33, color: '#87CEEB' },
-        { type: 'Sent to Lab', value: 42, color: '#98FB98' },
-        { type: 'Refusal', value: 8, color: '#1E90FF' }
+        { type: 'Invalid', value: 33, color: '#b3e6f7' },
+        { type: 'Sent to Lab', value: 42, color: '#aee9f7' },
+        { type: 'Refusal', value: 8, color: '#0074c2' }
       ]
     },
     {
       name: 'Urine Drug Test',
       data: [
-        { type: 'Negative', value: 0, color: '#003366' },
+        { type: 'Negative', value: 0, color: '#8886b3' },
         { type: 'Non Negative', value: 0, color: '#FFA500' },
-        { type: 'Invalid', value: 0, color: '#87CEEB' },
-        { type: 'Sent to Lab', value: 91, color: '#98FB98' },
-        { type: 'Refusal', value: 9, color: '#1E90FF' }
+        { type: 'Invalid', value: 0, color: '#b3e6f7' },
+        { type: 'Sent to Lab', value: 91, color: '#aee9f7' },
+        { type: 'Refusal', value: 9, color: '#0074c2' }
       ]
     },
     {
       name: 'Breath Alcohol Test',
       data: [
-        { type: 'Negative', value: 70, color: '#003366' },
+        { type: 'Negative', value: 70, color: '#8886b3' },
         { type: 'Non Negative', value: 42, color: '#FFA500' },
-        { type: 'Invalid', value: 0, color: '#87CEEB' },
-        { type: 'Sent to Lab', value: 0, color: '#98FB98' },
-        { type: 'Refusal', value: 5, color: '#1E90FF' }
+        { type: 'Invalid', value: 0, color: '#b3e6f7' },
+        { type: 'Sent to Lab', value: 0, color: '#aee9f7' },
+        { type: 'Refusal', value: 5, color: '#0074c2' }
       ]
     }
-  ]
+  ];
+
+  // Legend data
+  const legendData = [
+    { label: 'Negative', color: '#8886b3' },
+    { label: 'Non Negative', color: '#FFA500' },
+    { label: 'Invalid', color: '#b3e6f7' },
+    { label: 'Sent to Lab', color: '#aee9f7' },
+    { label: 'Refusal', color: '#0074c2' }
+  ];
 
   useEffect(() => {
     if (chartRef.current) {
@@ -543,21 +700,7 @@ const TestResultsChart: React.FC = () => {
           }
         },
         legend: {
-          data: [
-            'Negative',
-            'Non Negative',
-            'Invalid',
-            'Sent to Lab',
-            'Refusal'
-          ],
-          top: 0,
-          left: 0,
-          itemWidth: 8,
-          itemHeight: 8,
-          textStyle: {
-            fontSize: 12,
-            color: '#666'
-          }
+          show: false
         },
         grid: {
           top: 40,
@@ -603,8 +746,8 @@ const TestResultsChart: React.FC = () => {
             color: '#666'
           }
         },
-        series: testData[0].data.map((item, index) => ({
-          name: item.type,
+        series: legendData.map((legend, index) => ({
+          name: legend.label,
           type: 'bar',
           barWidth: 20,
           barGap: '30%',
@@ -620,7 +763,7 @@ const TestResultsChart: React.FC = () => {
           data: testData.map((test) => ({
             value: test.data[index].value,
             itemStyle: {
-              color: item.color,
+              color: test.data[index].color,
               borderRadius: [2, 2, 0, 0]
             }
           }))
@@ -636,10 +779,50 @@ const TestResultsChart: React.FC = () => {
         chartInstance.current = null
       }
     }
-  }, [])
+  }, [testData, legendData])
 
-  return <ResultsChartContainer ref={chartRef} />
+  return (
+    <ResultsCard>
+      <ResultsHeader>
+        <ResultsTitle>Test Sample Results</ResultsTitle>
+        <div style={{ display: 'flex', gap: 2, alignItems: 'center', marginRight: '5%' }}>
+          <span style={{ color: '#b0b0b0', fontWeight: 500, marginRight: 4 }}>Location</span>
+          <Select defaultValue="All" size="small" style={{ width: 90, marginRight: 8 }}>
+            <Select.Option value="All">All</Select.Option>
+          </Select>
+          <span style={{ color: '#b0b0b0', fontWeight: 500, marginRight: 4 }}>Year</span>
+          <Select defaultValue="2023" size="small" style={{ width: 70, marginRight: 8 }}>
+            <Select.Option value="2023">2023</Select.Option>
+          </Select>
+          <span style={{ color: '#b0b0b0', fontWeight: 500, marginRight: 4 }}>Month</span>
+          <Select defaultValue="04" size="small" style={{ width: 60, marginRight: 8 }}>
+            <Select.Option value="04">04</Select.Option>
+          </Select>
+          <span style={{ color: '#b0b0b0', fontWeight: 500, marginRight: 4 }}>Day</span>
+          <Select defaultValue="13" size="small" style={{ width: 60, marginRight: 8 }}>
+            <Select.Option value="13">13</Select.Option>
+          </Select>
+          <span style={{ color: '#b0b0b0', fontWeight: 500, marginRight: 4 }}>From</span>
+          <input type="text" placeholder="dd/mm/yyyy" style={{ width: 90, border: '1px solid #e0e0e0', borderRadius: 4, padding: '2px 8px', marginRight: 4, color: '#b0b0b0', fontSize: 13 }} />
+          <span style={{ color: '#b0b0b0', fontWeight: 500, marginRight: 4 }}>To</span>
+          <input type="text" placeholder="dd/mm/yyyy" style={{ width: 90, border: '1px solid #e0e0e0', borderRadius: 4, padding: '2px 8px', color: '#b0b0b0', fontSize: 13 }} />
+        </div>
+      </ResultsHeader>
+      <ResultsLegend>
+        {legendData.map((item) => (
+          <ResultsLegendItem key={item.label}>
+            <ResultsLegendColor color={item.color} />
+            {item.label}
+          </ResultsLegendItem>
+        ))}
+      </ResultsLegend>
+      <div style={{ width: '100%', height: 380 }}>
+        <div ref={chartRef} style={{ width: '100%', height: '100%' }} />
+      </div>
+    </ResultsCard>
+  );
 }
+
 type TimeRangeType = 'today' | 'currentWeek' | 'currentMonth' | 'currentYear'
 
 interface Props {
@@ -758,21 +941,15 @@ const DailySummary: React.FC<Props> = ({ timeRange }) => {
 
       <LocationSection>
         <LocationLabel>Location</LocationLabel>
-        <Select defaultValue="All" style={{ width: '100%' }}>
+        <StyledSelect defaultValue="All" style={{ width: '100%' }}>
           <Select.Option value="All">All</Select.Option>
-        </Select>
+        </StyledSelect>
       </LocationSection>
 
       <TestsSection>
         <TestsTitle>Tests</TestsTitle>
         <DonutChart ref={donutChartRef}>
-          <TotalNumber
-            style={{
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)'
-            }}
-          >
+          <TotalNumber>
             <div className="number">{totalTests}</div>
             <div className="label">Total</div>
           </TotalNumber>
@@ -841,5 +1018,22 @@ const FirstView: React.FC<Props> = ({ timeRange }) => {
     </PageContainer>
   )
 }
+
+// Style the Ant Design Select
+const StyledSelect = styled(Select)`
+  &.ant-select {
+    width: 100% !important;
+  }
+  .ant-select-selector {
+    border-radius: 6px !important;
+    border: 1.5px solid #e0e0e0 !important;
+    background: #fff !important;
+    font-size: 15px;
+    color: #0A1766;
+    min-height: 36px;
+    align-items: center;
+    display: flex;
+  }
+`
 
 export default FirstView
