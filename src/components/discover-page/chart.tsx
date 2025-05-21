@@ -408,7 +408,7 @@ const SeventhChart: React.FC<CustomProps> = ({contentData, tableData, timeRange,
                       xAxisData={item.dataName}
                       isStack={false}
                       barWidth={30}
-                      height="150px"
+                      height="170px"
                     />
                   </RightContent>
                 </MainCcontent>
@@ -433,14 +433,73 @@ const SeventhChart: React.FC<CustomProps> = ({contentData, tableData, timeRange,
                 xAxisData={[]}
                 isStack={false}
                 barWidth={10}
-                height="160px"
+                height="180px"
               />
             </>)
           })
         }
       </MiddleContent>
     </ContentRable>
-const EighthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+
+const NinethChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+  <ContentRable>
+    <LeftContent>
+        <TableWrapper>
+          {contentData.map((item, idx) => {
+            return (
+              <>
+                <MainCcontent style={{ marginTop: '10%'}}>
+                  <LeftContent1 style={{ marginTop: '7%'}}>
+                    {
+                      item.content != "" ? <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%'/> : <></>
+                    }
+
+                    {tableData?.[idx] ? (
+                      tableData[idx].map((it) => {
+                        if (it.time === timeRange) {
+                          return it.info.map((i) => {
+                            return (
+                              <>
+                                <Arrow content={i.name} key={i.name} isContent={false} width='60%'/>
+                              </>
+                            )
+                          })
+                        } else {
+                          return <></>
+                        }
+                      })
+                    ) : (
+                      <></>
+                    )}
+                  </LeftContent1>
+                  <RightContent>
+                    <BarEcharts
+                      direction="horizontal"
+                      data={item.series}
+                      xAxisData={item.dataName}
+                      isStack={false}
+                      barWidth={30}
+                      height="150px"
+                    />
+                  </RightContent>
+                </MainCcontent>
+                {
+                idx !== (contentData.length - 1) ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>
+                }
+              </>
+            )
+          })}
+        </TableWrapper>
+      </LeftContent>
+    <MiddleContent>
+      <TypeDistributionChart
+            timeRange={timeRange}
+            chartData={tableData[0]}
+          />
+    </MiddleContent>
+    </ContentRable>
+
+const TenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
   <ContentRable>
       <LeftContent>
         <TableWrapper>
@@ -503,7 +562,7 @@ const EighthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, 
         }
       </MiddleContent>
     </ContentRable>
-const NinethChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const EleventhChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
   <ContentRable>
       <LeftContent>
         <TableWrapper>
@@ -565,7 +624,7 @@ const NinethChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, 
         }
       </MiddleContent>
     </ContentRable>
-const TenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const TwelvethChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
   <ContentRable>
       <LeftContent>
         <TableWrapper>
@@ -628,7 +687,7 @@ const TenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, y
         }
       </MiddleContent>
     </ContentRable>
-const EleventhChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const ThirteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
   <ContentRable>
       <LeftContent>
         <TableWrapper>
@@ -690,7 +749,7 @@ const EleventhChart: React.FC<CustomProps> = ({contentData, tableData, timeRange
         }
       </MiddleContent>
     </ContentRable>
-const TwelvethChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const FourteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
   <ContentRable>
       <LeftContent>
         <TableWrapper>
@@ -749,7 +808,7 @@ const TwelvethChart: React.FC<CustomProps> = ({contentData, tableData, timeRange
         }
       </MiddleContent>
     </ContentRable>
-const ThirteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const FifteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
   <ContentRable>
       <LeftContent>
         <TableWrapper>
@@ -788,7 +847,7 @@ const ThirteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRan
         }
       </MiddleContent>
     </ContentRable>
-const FourteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const SixteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
   <ContentRable>
       <LeftContent>
         <TableWrapper>
@@ -852,7 +911,7 @@ const FourteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRan
         }
       </MiddleContent>
     </ContentRable>
-const FifteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const SeventeenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
   <ContentRable>
       <LeftContent>
         <TableWrapper>
@@ -976,8 +1035,6 @@ const Table: React.FC<Props> = ({ timeRange, tableData, contentData, yearlyData,
       return <SixthChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
     case 'seven':
       return <SeventhChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
-    case 'eight':
-      return <EighthChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
     case 'nine':
       return <NinethChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
     case 'ten':
@@ -992,8 +1049,12 @@ const Table: React.FC<Props> = ({ timeRange, tableData, contentData, yearlyData,
       return <FourteenthChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
     case 'fiveteen':
       return <FifteenthChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
+    case 'sixteen':
+      return <SixteenthChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
+    case 'seventeen':
+      return <SeventeenthChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
     default:
-      return <ThirdChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
+      return <SeventhChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
   }
 }
 

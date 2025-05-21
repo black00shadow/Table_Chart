@@ -593,10 +593,79 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/6.png'),
-    tableTitle:'Breath Alcohol Test Results',
+    tableTitle:'Rapid Oral Fluid Drug Screen Results',
     subTitle: 'Result',
     collectors: [],
     reqType: 'eight',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: 'Negative',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Non Negative',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Invaild',
+        dataName: [],
+        series: []
+      },
+      {
+        content: 'Sent to Lab(RFT)',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9222, 1022, 4411, 1244, 3050, 4000],
+        [9, 10, 11, 12, 300, 4000]
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [2239, 4510, 1111, 1276, 3050, 4000]
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [2239, 4510, 1111, 1276, 3050, 4000]
+      ],
+      [
+        [9322, 1650, 1331, 1762, 3400, 4000],
+        [2239, 4510, 1111, 1276, 3050, 4000]
+      ]
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/6.png'),
+    tableTitle:'Hair Drug Test (Laboratory Test)',
+    subTitle: 'Result',
+    collectors: [],
+    reqType: 'nine',
+    resType: 'PatientTime',
+    contentData: [
+      {
+        content: '',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [9222, 1022, 4411, 1244, 3050, 4000],
+        [9, 10, 11, 12, 300, 4000]
+      ]
+    ]
+  },
+  {
+    iconUrl: require('@/assets/img/6.png'),
+    tableTitle:'Breath Alcohol Test Results',
+    subTitle: 'Result',
+    collectors: [],
+    reqType: 'ten',
     resType: 'PatientTime',
     contentData: [
       {
@@ -635,7 +704,7 @@ const DEFAULT_DATA:DiscoverData[] = [
     tableTitle:'Drug Classes - Negative Results',
     subTitle: 'Result',
     collectors: [],
-    reqType: 'nine',
+    reqType: 'eleven',
     resType: 'PatientTime',
     contentData: [
       {
@@ -670,7 +739,7 @@ const DEFAULT_DATA:DiscoverData[] = [
     tableTitle:'Drug Classes - Non Negative Results',
     subTitle: 'Result',
     collectors: [],
-    reqType: 'ten',
+    reqType: 'twelve',
     resType: 'PatientTime',
     contentData: [
       {
@@ -705,7 +774,7 @@ const DEFAULT_DATA:DiscoverData[] = [
     tableTitle:'Drug Classes - Invalid Results',
     subTitle: 'Results',
     collectors: [],
-    reqType: 'eleven',
+    reqType: 'thirteen',
     resType: 'PatientTime',
     contentData: [
       {
@@ -740,7 +809,7 @@ const DEFAULT_DATA:DiscoverData[] = [
     tableTitle:'Collector Performance',
     subTitle: 'Proceed Tests',
     collectors: [],
-    reqType: 'twelve',
+    reqType: 'fourteen',
     resType: 'PatientTime',
     contentData: [
       {
@@ -777,7 +846,7 @@ const DEFAULT_DATA:DiscoverData[] = [
     tableTitle:'Collector Rankings',
     subTitle: 'Rankings',
     collectors: [],
-    reqType: 'thirteen',
+    reqType: 'fiveteen',
     resType: 'PatientTime',
     contentData: [
       {
@@ -804,7 +873,7 @@ const DEFAULT_DATA:DiscoverData[] = [
     tableTitle:'Patient',
     subTitle: 'Appointments',
     collectors: [],
-    reqType: 'fourteen',
+    reqType: 'sixteen',
     resType: 'PatientTime',
     contentData: [
       {
@@ -847,7 +916,7 @@ const DEFAULT_DATA:DiscoverData[] = [
     tableTitle:'Patient Communication',
     subTitle: 'Reports',
     collectors: [],
-    reqType: 'fiveteen',
+    reqType: 'seventeen',
     resType: 'PatientTime',
     contentData: [
       {
