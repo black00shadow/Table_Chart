@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Arrow from '../arrow'
 import ReTable from '../table'
+import Line from '../line'
 const TableWrapper = styled.div`
   width: 100%;
   // height: 100%;
@@ -10,8 +11,6 @@ const TableWrapper = styled.div`
 
 const MainCcontent = styled.div`
   width: 100%;
-  // height: 100%;
-  padding: 16px;
   display: flex;
 `
 
@@ -20,18 +19,28 @@ const LeftContent1 = styled.div`
   // height: 100%;
   // padding: 16px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 8px;
+  padding: 2px 0;
+  align-self: anchor-center;
 `
 
 const RightContent = styled.div`
   // height: 100%;
   // padding: 16px;
-  width: 65%;
+  margin-left: 10%;
+  width: 55%;
   // flex: 1;
 `
+
+const Div = styled.div`
+  margin: 0px;
+  padding-top: 3px;
+`
+
 type TimeRangeType = 'today' | 'currentWeek' | 'currentMonth' | 'currentYear'
 
-interface SubContent{
+export interface SubContent{
   time: string;
   info: {
     name: string;
@@ -39,7 +48,7 @@ interface SubContent{
   }[]
 };
 
-type ContentData = SubContent[];
+export type ContentData = SubContent[];
 export type TableData = ContentData[];
 
 export interface ViewProps {
@@ -73,42 +82,63 @@ const Table: React.FC<ViewProps> = ({ contentNames, collectors, timeRange, table
       {contentNames.map((contentName, idx) => {
         return (
           <>
-            <MainCcontent>
-              <LeftContent1>
-                {
-                  contentName != "" ? <Arrow content={contentName} backgroundColor="#176CC9" /> : <></>
-                }
-                {tbdata?.[idx] ? (
-                  tbdata[idx].map((it) => {
-                    if (it.time === timeRange) {
-                      return it.info.map((i) => {
-                        return (
-                          <>
-                            <Arrow content={i.name} key={i.name} />
-                          </>
-                        )
-                      })
-                    } else {
-                      return <></>
-                    }
-                  })
-                ) : (
-                  <></>
-                )}
-              </LeftContent1>
-              <RightContent>
-                {tbdata?.[idx] ? (
-                  <ReTable
-                    rows={3}
-                    columns={3}
-                    initialData={tbdata[idx]}
-                    onDataChange={(data) => onDataChange(data, idx)}
+           <Div>
+              {contentName !== "" ? (
+                <div style={{marginTop: 5}}>
+                  <Arrow
+                    content={contentName}
+                    isContent = {true}
+                    color="#fff"
+                    width='30%'
                   />
-                ) : (
-                  <></>
-                )}
-              </RightContent>
-            </MainCcontent>
+                </div>
+              ) : (
+                <></>
+              )}
+              <Div>
+                  {tbdata?.[idx] ? (
+                    tbdata[idx].map((it, i) => {
+                      if (it.time === timeRange) {
+                        return it.info.map((i) => {
+                          return (<>
+                            <MainCcontent>
+                              <LeftContent1>
+                              <Arrow
+                                width='100%'
+                                isContent = {false}
+                                content={i.name}
+                                key={i.name}
+                                color="#fff"
+                              />
+                            </LeftContent1>
+                            <RightContent>
+                              {tbdata?.[idx] ? (
+                                <ReTable
+                                  rows={3}
+                                  columns={3}
+                                  content={i.name}
+                                  initialData={tbdata[idx]}
+                                  onDataChange={(data) => onDataChange(data, idx)}
+                                />
+                              ) : (
+                                <></>
+                              )}
+                            </RightContent>
+                            </MainCcontent>
+                            </>)
+                        })
+                      } else {
+                        return <></>
+                      }
+                    })
+                  ) : (
+                    <></>
+                  )}
+              </Div>
+              {
+                idx !== (contentNames.length - 1) ? <Line margin="15px 0" color="#dddddd" width='95%' height='2px' /> : <></>
+              }
+            </Div>
           </>
         )
       })}

@@ -8,21 +8,21 @@ interface ArrowProps {
   fontSize?: string
   content?: string
   height?: string
-  borderRadius?: string
   onClick?: () => void
+  isContent: boolean
 }
 
 const ArrowContainer = styled.div<ArrowProps>`
   position: relative;
   display: inline-flex;
   align-items: center;
-  height: ${(props) => props.height || '32px'};
-  background: ${(props) => props.backgroundColor || '#1890ff'};
+  height: ${(props) => props.height};
+  background: ${(props) => props.backgroundColor};
   color: ${(props) => props.color || '#fff'};
-  padding: 0 ${(props) => '10px'};
-  font-size: ${(props) => props.fontSize || '14px'};
+  padding: 0 16px;
+  font-size: ${(props) => props.fontSize};
   cursor: pointer;
-  border-radius: ${(props) => props.borderRadius || '4px'};
+  border-radius: 0;
   user-select: none;
 
   &::after {
@@ -44,23 +44,21 @@ const ArrowContainer = styled.div<ArrowProps>`
 `
 
 const Arrow: React.FC<ArrowProps> = ({
-  width = '40px',
-  backgroundColor = '#1890ff',
+  isContent = true,
+  width = '100%',
   color = '#fff',
-  fontSize = '14px',
   content = '',
-  height = '32px',
-  borderRadius = '4px',
   onClick
 }) => {
+  console.log(isContent)
   return (
     <ArrowContainer
-      width={width}
-      backgroundColor={backgroundColor}
+      isContent = {isContent}
+      style={{width: width}}
+      backgroundColor={isContent ? '#176CC9' : "#3E93F7"}
       color={color}
-      fontSize={fontSize}
-      height={height}
-      borderRadius={borderRadius}
+      fontSize={isContent ? '16px' : '14px'}
+      height={isContent ? '40px' : '36px'}
       onClick={onClick}
     >
       {content}

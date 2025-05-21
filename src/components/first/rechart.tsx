@@ -252,7 +252,8 @@ const Icon = ({ type }: { type: string }) => {
 const DEFAULT_DATA:DiscoverData[] = [
   {
     iconUrl: require('@/assets/img/time.png'),
-    title:'Patient Time',
+    tableTitle:'Patient Time',
+    subTitle: 'Test Time',
     collectors: ['Rusira Rusira'],
     reqType: 'three',
     resType: 'PatientTime',
@@ -313,7 +314,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/time.png'),
-    title:'Test Time',
+    tableTitle:'Test Time',
+    subTitle: 'Test Time',
     collectors: ['All'],
     reqType: 'four',
     resType: 'PatientTime',
@@ -374,7 +376,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/timing.png'),
-    title:'Test Categories',
+    tableTitle:'Test Categories',
+    subTitle: 'Result',
     collectors: [],
     reqType: 'five',
     resType: 'PatientTime',
@@ -404,7 +407,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/6.png'),
-    title:'Rapid Urine Drug Screen Results',
+    tableTitle:'Rapid Urine Drug Screen Results',
+    subTitle: 'Result',
     collectors: [],
     reqType: 'six',
     resType: 'PatientTime',
@@ -460,7 +464,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/6.png'),
-    title:'Urine Drug Test Results (Laboratory Test)',
+    tableTitle:'Urine Drug Test Results (Laboratory Test)',
+    subTitle: 'Result',
     collectors: [],
     reqType: 'seven',
     resType: 'PatientTime',
@@ -489,7 +494,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/6.png'),
-    title:'Breath Alcohol Test Results',
+    tableTitle:'Breath Alcohol Test Results',
+    subTitle: 'Result',
     collectors: [],
     reqType: 'eight',
     resType: 'PatientTime',
@@ -527,7 +533,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/6.png'),
-    title:'Drug Classes - Negative Results',
+    tableTitle:'Drug Classes - Negative Results',
+    subTitle: 'Result',
     collectors: [],
     reqType: 'nine',
     resType: 'PatientTime',
@@ -561,7 +568,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/6.png'),
-    title:'Drug Classes - Non Negative Results',
+    tableTitle:'Drug Classes - Non Negative Results',
+    subTitle: 'Result',
     collectors: [],
     reqType: 'ten',
     resType: 'PatientTime',
@@ -595,7 +603,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/6.png'),
-    title:'Drug Classes - Invalid Results',
+    tableTitle:'Drug Classes - Invalid Results',
+    subTitle: 'Results',
     collectors: [],
     reqType: 'eleven',
     resType: 'PatientTime',
@@ -629,7 +638,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/2.png'),
-    title:'Collector Performance',
+    tableTitle:'Collector Performance',
+    subTitle: 'Proceed Tests',
     collectors: [],
     reqType: 'twelve',
     resType: 'PatientTime',
@@ -665,7 +675,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/2.png'),
-    title:'Collector Rankings',
+    tableTitle:'Collector Rankings',
+    subTitle: 'Rankings',
     collectors: [],
     reqType: 'thirteen',
     resType: 'PatientTime',
@@ -691,7 +702,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/3.png'),
-    title:'PatientTime',
+    tableTitle:'Patient',
+    subTitle: 'Appointments',
     collectors: [],
     reqType: 'fourteen',
     resType: 'PatientTime',
@@ -733,7 +745,8 @@ const DEFAULT_DATA:DiscoverData[] = [
   },
   {
     iconUrl: require('@/assets/img/3.png'),
-    title:'Patient Communication',
+    tableTitle:'Patient Communication',
+    subTitle: 'Reports',
     collectors: [],
     reqType: 'fiveteen',
     resType: 'PatientTime',
@@ -846,26 +859,24 @@ const SAClinicsDashboard: React.FC = () => {
           </SidebarMenu>
         </Sidebar>
         <MainContent>
-          <FirstView timeRange={timeRange} />
+          {/* <FirstView timeRange={timeRange} /> */}
           {
             DEFAULT_DATA.map((data)=> <DiscoverPage {...data} key={data.reqType}/>)
           }
-          {/* <DiscoverPage {...DEFAULT_DATA[2]}/> */}
 
-          {/* <ThreeView /> */}
-          {/* <FourView /> */}
-          {/* <FiveView /> */}
-          {/* <SixView /> */}
-          {/* <SevenView /> */}
-          {/* <DiscoverPage {...DEFAULT_DATA['seven']}/> */}
-          {/* <EightView /> */}
-          {/* <NineView /> */}
-          {/* <TenView /> */}
-          {/* <ElevenView /> */}
-          {/* <TwelveView /> */}
-          {/* <ThirteenView /> */}
-          {/* <FourteenView /> */}
-          {/* <FiveteenView /> */}
+          {/* <ThreeView />
+          <FourView />
+          <FiveView />
+          <SixView />
+          <SevenView />
+          <EightView />
+          <NineView />
+          <TenView />
+          <ElevenView />
+          <TwelveView />
+          <ThirteenView />
+          <FourteenView />
+          <FiveteenView /> */}
         </MainContent>
       </ContentContainer>
     </AppContainer>

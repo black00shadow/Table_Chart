@@ -633,7 +633,7 @@ export interface TestTypesChart2Props {
   }[]
 }
 // 修改TestTypesChart2组件，接收timeRange参数
-const TestTypesChart2: React.FC<TestTypesChart2Props> = ({
+export const TestTypesChart2: React.FC<TestTypesChart2Props> = ({
   timeRange,
   chartData
 }) => {

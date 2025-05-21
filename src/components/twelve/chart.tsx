@@ -438,7 +438,7 @@ const Table: React.FC<Props> = ({ timeRange, tableData }) => {
           </MainCcontent>
           <MainCcontent>
             <LeftContent1>
-              <Arrow content="Collectors" backgroundColor="#176CC9" />
+              {/* <Arrow content="Collectors" backgroundColor="#176CC9" /> */}
             </LeftContent1>
             <RightContent>
               <BarEcharts

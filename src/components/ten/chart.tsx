@@ -528,7 +528,7 @@ const Chart: React.FC<Props> = ({ timeRange, tableData }) => {
         <TableWrapper>
           <MainCcontent>
             <LeftContent1>
-              <Arrow content="Negative" backgroundColor="#176CC9" />
+              {/* <Arrow content="Negative" backgroundColor="#176CC9" /> */}
             </LeftContent1>
             <RightContent>
               <BarEcharts
@@ -543,7 +543,7 @@ const Chart: React.FC<Props> = ({ timeRange, tableData }) => {
           </MainCcontent>
           <MainCcontent>
             <LeftContent1>
-              <Arrow content="Synthetic" backgroundColor="#176CC9" />
+              {/* <Arrow content="Synthetic" backgroundColor="#176CC9" /> */}
             </LeftContent1>
             <RightContent>
               <PieEcharts

@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Checkbox, Radio, Select } from 'antd'
+import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 
 const ViewContainer = styled.div`
   // display: flex;
   // align-items: center;
   // flex-wrap: wrap;
   // gap: 20px;
-  padding: 12px 16px;
+  padding: 12px 0px;
   // background: #fff;
   // border-radius: 8px;
   // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -22,6 +23,7 @@ const YearSelector = styled.div`
   justify-content: space-around;
   gap: 8px;
   background: #1890ff;
+  padding: 0px;
 `
 
 const ArrowButton = styled.button<{ direction: 'left' | 'right' }>`
@@ -33,16 +35,11 @@ const ArrowButton = styled.button<{ direction: 'left' | 'right' }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  // color: #1890ff;
   font-size: 16px;
-  padding: 0 10px
+  padding: 0 10px;
   &:hover {
     background: #f0f0f0;
     border-radius: 4px;
-  }
-
-  &::before {
-    content: '${(props) => (props.direction === 'left' ? '←' : '→')}';
   }
 `
 
@@ -99,9 +96,9 @@ const YearView: React.FC<IProps> = ({ onViewChange, onYearChange }) => {
 
   return (
     <ViewContainer>
-      <div style={{ display: 'flex', flexWrap: 'nowrap', height: '50%' }}>
+      <div style={{ display: 'flex', flexWrap: 'nowrap', height: '50%', padding: '10, 10, 10, 10' }}>
         <div
-          style={{ color: '#333333', textAlign: 'center', paddingTop: '17px' }}
+          style={{ color: '#333333', textAlign: 'center', paddingTop: '17px', marginLeft: '15px' }}
         >
           <div> Options： </div>
         </div>
@@ -119,7 +116,7 @@ const YearView: React.FC<IProps> = ({ onViewChange, onYearChange }) => {
           <Checkbox value="month">Month View</Checkbox>
           <Select
             defaultValue="Select Year"
-            style={{ width: 120 }}
+            style={{ width: '20%' }}
             onChange={(value) => {
               setCurrentYear(Number(value))
               onYearChange?.(Number(value))
@@ -128,8 +125,10 @@ const YearView: React.FC<IProps> = ({ onViewChange, onYearChange }) => {
           />
         </Checkbox.Group>
       </div>
-      <YearSelector>
-        <ArrowButton direction="left" onClick={handlePrevYear} />
+      <YearSelector style={{padding: '16px, 0px'}}>
+        <ArrowButton direction="left" onClick={handlePrevYear} style={{marginLeft: '10px'}}>
+          <LeftOutlined />
+        </ArrowButton>
         <div style={{ display: 'flex', alignItems: 'center', flex: '1' }}>
           {years.map((year) => (
             <div
@@ -143,12 +142,14 @@ const YearView: React.FC<IProps> = ({ onViewChange, onYearChange }) => {
                 justifyContent: 'space-around'
               }}
             >
-              <YearText>{year}</YearText>
-              <YearDot active={year === currentYear} />
+              <YearText style={{fontWeight: year == currentYear ? 'bold' : 'normal'}}>{year}</YearText>
+              {/* <YearDot active={year === currentYear} /> */}
             </div>
           ))}
         </div>
-        <ArrowButton direction="right" onClick={handleNextYear} />
+        <ArrowButton direction="right" onClick={handleNextYear} style={{marginRight: '10px'}}>
+          <RightOutlined />
+        </ArrowButton>
       </YearSelector>
     </ViewContainer>
   )

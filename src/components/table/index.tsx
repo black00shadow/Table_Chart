@@ -9,32 +9,33 @@ const TableContainer = styled.div`
 const StyledTable = styled.table`
   width: 100%;
   border-collapse: separate;
-  border-spacing: 8px;
+  border-spacing: 1px;
   /* background-color: #fff; */
   /* border-radius: 8px; */
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
-  padding: 8px;
+  // padding: 2px;
 `
 
 const TableCell = styled.td`
   border: 1px solid #e5e7eb;
-  padding: 0;
+  padding-right: 5px;
+  margin: 0;
   height: 40px;
-  width: 50px;
+  width: 90%;
   background: #fff;
   border-radius: 4px;
   overflow: hidden;
+  margin-left: 15%;
 `
 
 const CellInput = styled.input`
   width: 100%;
   height: 100%;
   border: none;
-  // padding: 8px;
-  text-align: center;
   background: transparent;
   font-size: 14px;
   color: #333;
+  text-align: right;
 
   &:focus {
     outline: 2px solid #1890ff;
@@ -49,6 +50,7 @@ const CellInput = styled.input`
 interface IProps {
   rows: number
   columns: number
+  content: string
   initialData: {
     time: string
     info: {
@@ -70,6 +72,7 @@ interface IProps {
 const Table: React.FC<IProps> = ({
   rows,
   columns,
+  content,
   initialData,
   onDataChange
 }) => {
@@ -144,17 +147,23 @@ const Table: React.FC<IProps> = ({
                 key={rowIndex}
                 style={{ display: 'flex', flexDirection: 'column' }}
               >
-                {row.info.map((cell, colIndex) => (
-                  <TableCell key={`${rowIndex}-${colIndex}`}>
-                    <CellInput
-                      type="text"
-                      value={cell.data[0] || ''}
-                      onChange={(e: any) =>
-                        handleCellChange(rowIndex, colIndex, e.target.value)
-                      }
-                    />
-                  </TableCell>
-                ))}
+                {row.info.map((cell, colIndex) => {
+                  if(cell.name == content) {
+                    return (
+                      (
+                        <TableCell key={`${rowIndex}-${colIndex}`}>
+                          <CellInput
+                            type="text"
+                            value={cell.data[0] || ''}
+                            onChange={(e: any) =>
+                              handleCellChange(rowIndex, colIndex, e.target.value)
+                            }
+                          />
+                        </TableCell>
+                      )
+                    )
+                  }
+                })}
               </tr>
             ))
           ) : (

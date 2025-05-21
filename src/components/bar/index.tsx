@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import * as echarts from 'echarts'
 
 const ChartContainer = styled.div<{ height?: string }>`
-  width: 100%;
+  width: 90%;
   height: ${(props) => props.height || '300px'};
   // background: #fff;
   // border-radius: 8px;

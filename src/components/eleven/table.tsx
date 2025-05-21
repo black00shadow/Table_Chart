@@ -87,34 +87,34 @@ const Table: React.FC<ViewProps> = ({ timeRange, tableData, onChange }) => {
     setTbdata(tableData)
   }, [tableData])
 
-  return (
-    <TableWrapper>
-      <MainContent>
-        <LeftContent>
-          {tbdata[0]?.map(item => (
-            item.time === 'today' ? (
-              item.info.map(i => (
-                <Arrow key={i.name} content={i.name} />
-              ))
-            ) : null
-          ))}
-        </LeftContent>
-        <RightContent>
-          {tbdata[0] && (
-            <ReTable
-              rows={3}
-              columns={4}
-              initialData={getTableData(tbdata[0])}
-              onDataChange={(data) => {
-                const newData = [...tbdata]
-                newData[0] = formatDataForSave(data)
-                onChange(newData)
-              }}
-            />
-          )}
-        </RightContent>
-      </MainContent>
-    </TableWrapper>
+  return (<></>
+    // <TableWrapper>
+    //   <MainContent>
+    //     <LeftContent>
+    //       {tbdata[0]?.map(item => (
+    //         item.time === 'today' ? (
+    //           item.info.map(i => (
+    //             <Arrow key={i.name} content={i.name} />
+    //           ))
+    //         ) : null
+    //       ))}
+    //     </LeftContent>
+    //     <RightContent>
+    //       {tbdata[0] && (
+    //         <ReTable
+    //           rows={3}
+    //           columns={4}
+    //           initialData={getTableData(tbdata[0])}
+    //           onDataChange={(data) => {
+    //             const newData = [...tbdata]
+    //             newData[0] = formatDataForSave(data)
+    //             onChange(newData)
+    //           }}
+    //         />
+    //       )}
+    //     </RightContent>
+    //   </MainContent>
+    // </TableWrapper>
   )
 }
 

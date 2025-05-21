@@ -96,49 +96,49 @@ const Table: React.FC<ViewProps> = ({ timeRange, tableData, onChange }) => {
   useEffect(() => {
     setTbdata(tableData)
   }, [tableData])
-  return (
-    <TableWrapper>
-      {_tableData.map((item, idx) => {
-        return (
-          <>
-            <MainCcontent>
-              <LeftContent1>
-                <Arrow content={item.content} backgroundColor="#176CC9" />
-                {tbdata?.[idx] ? (
-                  tbdata[idx].map((it) => {
-                    if (it.time === timeRange) {
-                      return it.info.map((i) => {
-                        return (
-                          <>
-                            <Arrow content={i.name} key={i.name} />
-                          </>
-                        )
-                      })
-                    } else {
-                      return <></>
-                    }
-                  })
-                ) : (
-                  <></>
-                )}
-              </LeftContent1>
-              <RightContent>
-                {tbdata?.[idx] ? (
-                  <ReTable
-                    rows={3}
-                    columns={3}
-                    initialData={tbdata[idx]}
-                    onDataChange={(data) => onDataChange(data, idx)}
-                  />
-                ) : (
-                  <></>
-                )}
-              </RightContent>
-            </MainCcontent>
-          </>
-        )
-      })}
-    </TableWrapper>
+  return (<></>
+    // <TableWrapper>
+    //   {_tableData.map((item, idx) => {
+    //     return (
+    //       <>
+    //         <MainCcontent>
+    //           <LeftContent1>
+    //             <Arrow content={item.content} backgroundColor="#176CC9" />
+    //             {tbdata?.[idx] ? (
+    //               tbdata[idx].map((it) => {
+    //                 if (it.time === timeRange) {
+    //                   return it.info.map((i) => {
+    //                     return (
+    //                       <>
+    //                         <Arrow content={i.name} key={i.name} />
+    //                       </>
+    //                     )
+    //                   })
+    //                 } else {
+    //                   return <></>
+    //                 }
+    //               })
+    //             ) : (
+    //               <></>
+    //             )}
+    //           </LeftContent1>
+    //           <RightContent>
+    //             {/* {tbdata?.[idx] ? (
+    //               <ReTable
+    //                 rows={3}
+    //                 columns={3}
+    //                 initialData={tbdata[idx]}
+    //                 onDataChange={(data) => onDataChange(data, idx)}
+    //               />
+    //             ) : (
+    //               <></>
+    //             )} */}
+    //           </RightContent>
+    //         </MainCcontent>
+    //       </>
+    //     )
+    //   })}
+    // </TableWrapper>
   )
 }
 

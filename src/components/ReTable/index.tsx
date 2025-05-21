@@ -6,10 +6,12 @@ const TableContainer = styled.div`
 `
 
 const StyledTable = styled.table`
-  width: 100%;
+  // width: 100%;
   border-collapse: separate;
-  border-spacing: 4px;
-  padding: 4px;
+  border-spacing: 1px;
+      width: 89%;
+    justify-self: center;
+  // padding: 4px;
 `
 
 const TableRow = styled.tr`
@@ -22,11 +24,12 @@ const TableRow = styled.tr`
 
 const TableCell = styled.td`
   border: 1px solid #e5e7eb;
-  padding: 0;
+  padding-right: 5px;
+  margin: 0;
   height: 40px;
   width: 50px;
   background: #fff;
-  border-radius: 2px;
+  border-radius: 4px;
   overflow: hidden;
   
   &:not(:last-child) {
@@ -38,7 +41,7 @@ const CellInput = styled.input`
   width: 100%;
   height: 100%;
   border: none;
-  text-align: center;
+  text-align: right;
   background: transparent;
   font-size: 14px;
   color: #333;

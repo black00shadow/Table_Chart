@@ -99,37 +99,37 @@ const Table: React.FC<ViewProps> = ({ timeRange, tableData, onChange }) => {
     setTbdata(tableData)
   }, [tableData])
   
-  return (
-    <TableWrapper>
-      {_tableData.map((item, idx) => (
-        <MainCcontent key={idx}>
-          <LeftContent1>
-            {tbdata?.[idx] ? (
-              tbdata[idx].map((it) => {
-                if (it.time === timeRange) {
-                  return it.info.map((i) => (
-                    <div key={i.name}>
-                      <Arrow content={i.name} />
-                    </div>
-                  ))
-                }
-                return null
-              })
-            ) : null}
-          </LeftContent1>
-          <RightContent>
-            {tbdata?.[idx] ? (
-              <ReTable
-                rows={3}
-                columns={3}
-                initialData={tbdata[idx]}
-                onDataChange={(data) => onDataChange(data, idx)}
-              />
-            ) : null}
-          </RightContent>
-        </MainCcontent>
-      ))}
-    </TableWrapper>
+  return (<></>
+    // <TableWrapper>
+    //   {_tableData.map((item, idx) => (
+    //     <MainCcontent key={idx}>
+    //       <LeftContent1>
+    //         {tbdata?.[idx] ? (
+    //           tbdata[idx].map((it) => {
+    //             if (it.time === timeRange) {
+    //               return it.info.map((i) => (
+    //                 <div key={i.name}>
+    //                   <Arrow content={i.name} />
+    //                 </div>
+    //               ))
+    //             }
+    //             return null
+    //           })
+    //         ) : null}
+    //       </LeftContent1>
+    //       <RightContent>
+    //         {/* {tbdata?.[idx] ? (
+    //           <ReTable
+    //             rows={3}
+    //             columns={3}
+    //             initialData={tbdata[idx]}
+    //             onDataChange={(data) => onDataChange(data, idx)}
+    //           />
+    //         ) : null} */}
+    //       </RightContent>
+    //     </MainCcontent>
+    //   ))}
+    // </TableWrapper>
   )
 }
 

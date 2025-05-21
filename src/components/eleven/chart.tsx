@@ -522,75 +522,75 @@ const Chart: React.FC<Props> = ({ timeRange, tableData }) => {
     })
   })
 
-  return (
-    <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          <MainCcontent>
-            <LeftContent1>
-              <Arrow content="Negative" backgroundColor="#176CC9" />
-            </LeftContent1>
-            <RightContent>
-              <BarEcharts
-                direction="horizontal"
-                data={_tableData[0].series}
-                xAxisData={_tableData[0].dataName}
-                isStack={false}
-                barWidth={20}
-                height="350px"
-              />
-            </RightContent>
-          </MainCcontent>
-          <MainCcontent>
-            <LeftContent1>
-              <Arrow content="Synthetic" backgroundColor="#176CC9" />
-            </LeftContent1>
-            <RightContent>
-              <PieEcharts
-                data={_tableData[1].series}
-                height="300px"
-                radius={['38%', '70%']}
-                centerText="49"
-                showPercentage={true}
-                legendPosition="top"
-              />
-            </RightContent>
-          </MainCcontent>
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        <LineChart
-          data={upperLineData}
-          xAxisData={upperLinexAxisData}
-          height="300px"
-          showSymbol={true}
-          yAxisMax={3600}
-          yAxisMin={0}
-          yAxisInterval={600}
-          smooth={true}
-          legend={{
-            show: true,
-            bottom: 0,
-            right: 30
-          }}
-        />
-        <LineChart
-          data={lowerLineData}
-          xAxisData={lowerLineXAxisData}
-          height="300px"
-          showSymbol={true}
-          yAxisMax={6800}
-          yAxisMin={0}
-          yAxisInterval={1700}
-          smooth={true}
-          legend={{
-            show: true,
-            bottom: 0,
-            right: 30
-          }}
-        />
-      </MiddleContent>
-    </ContentRable>
+  return (<></>
+    // <ContentRable>
+    //   <LeftContent>
+    //     <TableWrapper>
+    //       <MainCcontent>
+    //         <LeftContent1>
+    //           <Arrow content="Negative" backgroundColor="#176CC9" />
+    //         </LeftContent1>
+    //         <RightContent>
+    //           <BarEcharts
+    //             direction="horizontal"
+    //             data={_tableData[0].series}
+    //             xAxisData={_tableData[0].dataName}
+    //             isStack={false}
+    //             barWidth={20}
+    //             height="350px"
+    //           />
+    //         </RightContent>
+    //       </MainCcontent>
+    //       <MainCcontent>
+    //         <LeftContent1>
+    //           <Arrow content="Synthetic" backgroundColor="#176CC9" />
+    //         </LeftContent1>
+    //         <RightContent>
+    //           <PieEcharts
+    //             data={_tableData[1].series}
+    //             height="300px"
+    //             radius={['38%', '70%']}
+    //             centerText="49"
+    //             showPercentage={true}
+    //             legendPosition="top"
+    //           />
+    //         </RightContent>
+    //       </MainCcontent>
+    //     </TableWrapper>
+    //   </LeftContent>
+    //   <MiddleContent>
+    //     <LineChart
+    //       data={upperLineData}
+    //       xAxisData={upperLinexAxisData}
+    //       height="300px"
+    //       showSymbol={true}
+    //       yAxisMax={3600}
+    //       yAxisMin={0}
+    //       yAxisInterval={600}
+    //       smooth={true}
+    //       legend={{
+    //         show: true,
+    //         bottom: 0,
+    //         right: 30
+    //       }}
+    //     />
+    //     <LineChart
+    //       data={lowerLineData}
+    //       xAxisData={lowerLineXAxisData}
+    //       height="300px"
+    //       showSymbol={true}
+    //       yAxisMax={6800}
+    //       yAxisMin={0}
+    //       yAxisInterval={1700}
+    //       smooth={true}
+    //       legend={{
+    //         show: true,
+    //         bottom: 0,
+    //         right: 30
+    //       }}
+    //     />
+    //   </MiddleContent>
+    // </ContentRable>
   )
 }
 

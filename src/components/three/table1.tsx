@@ -88,14 +88,14 @@ const Table: React.FC<ThreeViewProps> = ({
     <TableWrapper>
       <MainCcontent>
         <LeftContent1>
-          <Arrow content="Rail (Cat 1)" />
-          <Arrow content="Rail (Cat 1)" />
-          <Arrow content="Rail (Cat 1)" />
-          <Arrow content="Rail (Cat 1)" />
+          {/* <Arrow content="Rail (Cat 1)" /> */}
+          {/* <Arrow content="Rail (Cat 1)" /> */}
+          {/* <Arrow content="Rail (Cat 1)" /> */}
+          {/* <Arrow content="Rail (Cat 1)" /> */}
         </LeftContent1>
         <RightContent>
           {/* <ReTable rows={3} columns={4} initialData={initialData1} /> */}
-          {tbdata?.[0] ? (
+          {/* {tbdata?.[0] ? (
             <ReTable
               rows={4}
               columns={4}
@@ -104,7 +104,7 @@ const Table: React.FC<ThreeViewProps> = ({
             />
           ) : (
             <></>
-          )}
+          )} */}
         </RightContent>
       </MainCcontent>
     </TableWrapper>

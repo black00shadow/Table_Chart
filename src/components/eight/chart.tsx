@@ -255,73 +255,73 @@ const Table: React.FC<Props> = ({ timeRange, tableData }) => {
     })
   })
 
-  return (
-    <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          {_tableData.map((item, idx) => {
-            return (
-              <>
-                <MainCcontent>
-                  <LeftContent1>
-                    <Arrow content={item.content} backgroundColor="#176CC9" />
-                    {tableData[idx].map((it) => {
-                      if (it.time === timeRange) {
-                        return it.info.map((i) => {
-                          return (
-                            <>
-                              <Arrow content={i.name} key={i.name} />
-                            </>
-                          )
-                        })
-                      } else {
-                        return <></>
-                      }
-                    })}
-                  </LeftContent1>
-                  <RightContent>
-                    <BarEcharts
-                      direction="horizontal"
-                      data={item.series}
-                      xAxisData={item.dataName}
-                      isStack={false}
-                      barWidth={30}
-                      height="200px"
-                    />
-                  </RightContent>
-                </MainCcontent>
-              </>
-            )
-          })}
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        <BarEcharts
-          direction="vertical"
-          data={midChartData}
-          xAxisData={xAxisMidData}
-          isStack={false}
-          barWidth={20}
-          height="200px"
-        />
-        <BarEcharts
-          direction="vertical"
-          data={midChartData}
-          xAxisData={xAxisMidData}
-          isStack={false}
-          barWidth={20}
-          height="200px"
-        />
-        <BarEcharts
-          direction="vertical"
-          data={midChartData}
-          xAxisData={xAxisMidData}
-          isStack={false}
-          barWidth={20}
-          height="200px"
-        />
-      </MiddleContent>
-    </ContentRable>
+  return (<></>
+    // <ContentRable>
+    //   <LeftContent>
+    //     <TableWrapper>
+    //       {_tableData.map((item, idx) => {
+    //         return (
+    //           <>
+    //             <MainCcontent>
+    //               <LeftContent1>
+    //                 <Arrow content={item.content} backgroundColor="#176CC9" />
+    //                 {tableData[idx].map((it) => {
+    //                   if (it.time === timeRange) {
+    //                     return it.info.map((i) => {
+    //                       return (
+    //                         <>
+    //                           <Arrow content={i.name} key={i.name} />
+    //                         </>
+    //                       )
+    //                     })
+    //                   } else {
+    //                     return <></>
+    //                   }
+    //                 })}
+    //               </LeftContent1>
+    //               <RightContent>
+    //                 <BarEcharts
+    //                   direction="horizontal"
+    //                   data={item.series}
+    //                   xAxisData={item.dataName}
+    //                   isStack={false}
+    //                   barWidth={30}
+    //                   height="200px"
+    //                 />
+    //               </RightContent>
+    //             </MainCcontent>
+    //           </>
+    //         )
+    //       })}
+    //     </TableWrapper>
+    //   </LeftContent>
+    //   <MiddleContent>
+    //     <BarEcharts
+    //       direction="vertical"
+    //       data={midChartData}
+    //       xAxisData={xAxisMidData}
+    //       isStack={false}
+    //       barWidth={20}
+    //       height="200px"
+    //     />
+    //     <BarEcharts
+    //       direction="vertical"
+    //       data={midChartData}
+    //       xAxisData={xAxisMidData}
+    //       isStack={false}
+    //       barWidth={20}
+    //       height="200px"
+    //     />
+    //     <BarEcharts
+    //       direction="vertical"
+    //       data={midChartData}
+    //       xAxisData={xAxisMidData}
+    //       isStack={false}
+    //       barWidth={20}
+    //       height="200px"
+    //     />
+    //   </MiddleContent>
+    // </ContentRable>
   )
 }
 

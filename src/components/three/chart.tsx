@@ -253,13 +253,13 @@ const Table: React.FC<ThreeViewProps> = ({ timeRange, tableData }) => {
               <>
                 <MainCcontent>
                   <LeftContent1>
-                    <Arrow content={item.content} backgroundColor="#176CC9" />
+                    {/* <Arrow content={item.content} backgroundColor="#176CC9" /> */}
                     {tableData[idx].map((it) => {
                       if (it.time === timeRange) {
                         return it.info.map((i) => {
                           return (
                             <>
-                              <Arrow content={i.name} key={i.name} />
+                              {/* <Arrow content={i.name} key={i.name} /> */}
                             </>
                           )
                         })

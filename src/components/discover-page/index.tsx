@@ -19,6 +19,7 @@ import tableIcon from '@/assets/img/table.png'
 import chartIcon from '@/assets/img/chart.png'
 import { TableType } from '@/mock/modules/mockData'
 import { TableData } from './table'
+import chart from './chart'
 
 export const getImageSize = (imageSrc:string) => {
       const img = new Image();
@@ -98,8 +99,6 @@ const OptionsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // padding: 11px 0;
-  // margin-bottom: 20px;
 `
 
 const TimeButtons = styled.div`
@@ -108,6 +107,7 @@ const TimeButtons = styled.div`
   justify-content: space-around;
   gap: 8px;
   border: 1px solid blue;
+  border-top: none;
   width: 38%;
   height: 100%;
   // padding: 10px;
@@ -116,21 +116,19 @@ const SubMenu = styled.div`
   color: #333333;
   padding-left: 10px;
 `
-const TimeButton = styled(Button)<{ $isActive?: boolean }>`
-  &.ant-btn {
-    ${(props) =>
-      props.$isActive &&
-      `
-      background-color: #1890ff;
-      color: white;
-      white-space: normal;
-      hyphens: auto;
-      width: 80px;
-      &:hover, &:focus {
-        background-color: #40a9ff;
-        color: white;
-      }
-    `}
+const TimeButton = styled.button<{ $isActive?: boolean }>`
+  background: none;
+  border: none;
+  color: #0A1766;
+  font-size: 16px;
+  margin-right: 32px;
+  cursor: pointer;
+  font-weight: ${props => props.$isActive ? 'bold' : 'normal'};
+  outline: none;
+  box-shadow: none;
+  padding: 0;
+  &:last-child {
+    margin-right: 0;
   }
 `
 
@@ -148,16 +146,24 @@ const YearViewContainer = styled.div`
 
 const DateRangeContainer = styled.div`
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  gap: 2px;
   border-right: 1px solid blue;
   border-bottom: 1px solid blue;
-  // border: 1px solid blue;
   height: 100%;
-  // padding: 10px;
 
   .ant-picker {
-    width: 240px;
+    width: 100%;
+  }
+
+  .date-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .date-label {
+    min-width: 40px;
   }
 `
 // const TitleIcon = styled.div`
@@ -185,43 +191,61 @@ const TitleIcon = ({iconUrl}:any) => {
   `;
   return <IconTpl/>
 } 
-const Sticky = styled.div`
-  width: ${stickyImageWidth / 2}px;
-  height: ${stickyImageHeight / 2}px;
-  background-image: url(${stickyImage});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-`
-const TableIcon = styled.div`
-  width: ${tableIconWidth}px;
-  height: ${tableIconHeight}px;
-  background-image: url(${tableIcon});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s;
-`
-const ChartIcon = styled.div`
-  width: ${chartIconWidth}px;
-  height: ${chartIconHeight}px;
-  background-image: url(${chartIcon});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s;
-`
+const Sticky = ({iconUrl}:any) => {
+  const { width, height } = getImageSize(iconUrl);
+
+  const IconTpl = styled.div`
+    width: ${width / 2}px;
+    height: ${height / 2}px;
+    background-image: url(${iconUrl});
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  `
+  return <IconTpl/>
+}
+const TableIcon = ({iconUrl}:any) => {
+
+  const { width, height } = getImageSize(iconUrl);
+  const IconTpl = styled.div`
+    width: ${width}px;
+    height: ${height}px;
+    background-image: url(${iconUrl});
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+  `;
+
+  return <IconTpl/>
+} 
+
+const ChartIcon = ({iconUrl}:any) => {
+
+  const { width, height } = getImageSize(iconUrl);
+  const IconTpl = styled.div`
+    width: ${width}px;
+    height: ${height}px;
+    background-image: url(${iconUrl});
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+  `;
+
+  return <IconTpl/>
+} 
 const IconBox = styled.div<{ $isActive?: boolean }>`
   width: 34px;
   background-color: ${(props) => (props.$isActive ? '#275681' : 'transparent')};
@@ -241,7 +265,8 @@ export interface ChartContent {
 
 export interface DiscoverData{
   iconUrl: string;
-  title: string;
+  tableTitle: string;
+  subTitle: string;
   collectors: string[];
   reqType: TableType;
   resType: string;
@@ -258,6 +283,7 @@ const Discover: React.FC<DiscoverData> = (data: DiscoverData) => {
   const chartInstance = useRef<echarts.ECharts | null>(null)
   const [tableData, setTableData] = useState<TableData>([])
   const [contentNames, setcontentNames] = useState<string[]>([])
+  const [selectedCollector, setSelectedCollector] = useState('');
 
   useEffect(() => {
     if (displayMode === 'chart' && chartRef.current) {
@@ -295,7 +321,6 @@ const Discover: React.FC<DiscoverData> = (data: DiscoverData) => {
     const res = await getData({
       type: data.reqType
     })
-    console.log(res)
     setTableData(res.data[data.resType])
   }
 
@@ -304,30 +329,20 @@ const Discover: React.FC<DiscoverData> = (data: DiscoverData) => {
       <MainContent>
         <Header>
           <TitleIcon iconUrl={data.iconUrl} />
-          <PageTitle>{data.title}</PageTitle>
+          <PageTitle>{data.tableTitle}</PageTitle>
           <Options>
             <Space>
-              {/* <Button
-                type={displayMode === 'table' ? 'primary' : 'default'}
-                icon={<TableOutlined />}
-                onClick={() => setDisplayMode('table')}
-              /> */}
               <IconBox
                 $isActive={displayMode === 'table'}
                 onClick={() => setDisplayMode('table')}
               >
-                <TableIcon />
+                <TableIcon iconUrl = {tableIcon} />
               </IconBox>
-              {/* <Button
-                type={displayMode === 'chart' ? 'primary' : 'default'}
-                icon={<BarChartOutlined />}
-                onClick={() => setDisplayMode('chart')}
-              /> */}
               <IconBox
                 $isActive={displayMode === 'chart'}
                 onClick={() => setDisplayMode('chart')}
               >
-                <ChartIcon />
+                <ChartIcon iconUrl = {chartIcon}/>
               </IconBox>
               <p>Location</p>
               <Select defaultValue="All" style={{ width: 120 }}>
@@ -341,15 +356,7 @@ const Discover: React.FC<DiscoverData> = (data: DiscoverData) => {
                   alert('Support printing！')
                 }}
               />
-              {/* <Button
-                icon={<BellOutlined />}
-                onClick={() => {
-                  alert('📌 Sticky (fixed at the top)')
-                }}
-              >
-                
-              </Button> */}
-              <Sticky
+              <Sticky iconUrl = {stickyImage}
                 onClick={() => {
                   alert('📌 Sticky (fixed at the top)')
                 }}
@@ -359,74 +366,110 @@ const Discover: React.FC<DiscoverData> = (data: DiscoverData) => {
         </Header>
 
         <OptionsContainer>
-          <TimeButtons>
+          <TimeButtons style={{ width: '42%', boxShadow: 'none', background: 'none', alignItems: 'center', justifyContent: 'flex-start', padding: 0  }}>
             <div
               style={{
                 fontWeight: 'bold',
-                color: '#333333',
-                fontSize: 16,
-                marginRight: '20px'
+                color: '#0A1766',
+                fontSize: 18,
+                marginLeft: 30,
+                marginRight: 30,
+                width: '35%'
               }}
             >
-              Tests
+              {data.subTitle}
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginRight: '5%' }}>
               <TimeButton
                 $isActive={timeRange === 'today'}
                 onClick={() => setTimeRange('today')}
-                style={{ width: '80px', whiteSpace: 'break-spaces' }}
               >
                 Today
               </TimeButton>
               <TimeButton
                 $isActive={timeRange === 'currentWeek'}
                 onClick={() => setTimeRange('currentWeek')}
-                style={{ width: '80px', whiteSpace: 'break-spaces' }}
               >
                 Current Week
               </TimeButton>
               <TimeButton
                 $isActive={timeRange === 'currentMonth'}
                 onClick={() => setTimeRange('currentMonth')}
-                style={{ width: '80px', whiteSpace: 'break-spaces' }}
               >
                 Current Month
               </TimeButton>
               <TimeButton
                 $isActive={timeRange === 'currentYear'}
                 onClick={() => setTimeRange('currentYear')}
-                style={{ width: '80px', whiteSpace: 'break-spaces' }}
               >
                 Current Year
               </TimeButton>
             </div>
           </TimeButtons>
 
-          <YearViewContainer>
+          <YearViewContainer style={{ width: displayMode === 'table' ? '' : '58%' }}>
             <YearView
               onViewChange={(view) => console.log('View changed to:', view)}
               onYearChange={(year) => console.log('Year changed to:', year)}
             />
           </YearViewContainer>
 
-          <DateRangeContainer>
-            <span>From</span>
-            <RangePicker
-              placeholder={['From', 'To']}
-              onChange={(dates) => {
-                if (dates) {
-                  setDateRange([
-                    dates[0]?.format('YYYY-MM-DD') || '',
-                    dates[1]?.format('YYYY-MM-DD') || ''
-                  ])
-                } else {
-                  setDateRange(null)
-                }
-              }}
-            />
+          <DateRangeContainer style={{ display: displayMode === 'table' ? '' : 'none', width: '10%'}}>
+            <div className="date-row" style = {{marginTop: '10px', marginLeft: 10, marginRight: 10}}>
+              <span className="date-label">From</span>
+              <DatePicker
+                onChange={(dates) => {
+                  if (dates) {
+                    // setDateRange([
+                    //   dates[0]?.format('YYYY-MM-DD') || '',
+                    //   dates[1]?.format('YYYY-MM-DD') || ''
+                    // ])
+                  } else {
+                    // setDateRange(null)
+                  }
+                }}
+              />
+            </div>
+            <div className="date-row" style = {{marginLeft: 10, marginRight: 10}}>
+              <span className="date-label">To</span>
+              <DatePicker
+                onChange={(dates) => {
+                  if (dates) {
+                    // setDateRange([
+                    //   dates[0]?.format('YYYY-MM-DD') || '',
+                    //   dates[1]?.format('YYYY-MM-DD') || ''
+                    // ])
+                  } else {
+                    // setDateRange(null)
+                  }
+                }}
+              />
+            </div>
           </DateRangeContainer>
         </OptionsContainer>
-
+        {data.collectors.length !== 0 && (
+          <>
+          <div style={{borderRight:'1px solid blue'}}>
+            <div style={{display: 'flex', backgroundColor: '#E6F7FA', border: '1px solid blue', width: '42%', float:'left'}}>
+              <div style={{margin: 10, width: '20%'}}>Collectors</div>
+              <div style={{width: '80%', alignContent: 'center'}}>
+                <Select
+                  value={selectedCollector}
+                  style={{ width: '95%' }}
+                  onChange={setSelectedCollector}
+                >
+                  {data.collectors.map((collector) => (
+                    <Select.Option key={collector} value={collector}>
+                      {collector}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </div>
+            </div>
+            <div style={{float: 'right', height: '100%', width: '10%', borderLeft:displayMode === 'table' ? '1px solid blue' : ''}}></div>
+          </div>
+          </>
+        )}
         {displayMode === 'table' ? (
           <TableView
             timeRange={timeRange}
@@ -434,10 +477,15 @@ const Discover: React.FC<DiscoverData> = (data: DiscoverData) => {
             contentNames={contentNames}
             tableData={tableData}
             yearlyData={data.yearlyData}
-            onChangeTable={onChangeTable}
-          />
+            onChangeTable={onChangeTable}/>
         ) : (
-          <ChartView timeRange={timeRange} tableData={tableData} contentData={data.contentData}/>
+          <ChartView
+            timeRange={timeRange}
+            tableData={tableData}
+            contentData={data.contentData}
+            yearlyData = {data.yearlyData}
+            reqType={data.reqType}
+            />
         )}
       </MainContent>
     </Container>

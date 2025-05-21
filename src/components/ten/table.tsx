@@ -103,14 +103,14 @@ const Table: React.FC<ViewProps> = ({ timeRange, tableData, onChange }) => {
           <>
             <MainCcontent>
               <LeftContent1>
-                <Arrow content={item.content} backgroundColor="#176CC9" />
+                {/* <Arrow content={item.content} backgroundColor="#176CC9" /> */}
                 {tbdata?.[idx] ? (
                   tbdata[idx].map((it) => {
                     if (it.time === timeRange) {
                       return it.info.map((i) => {
                         return (
                           <>
-                            <Arrow content={i.name} key={i.name} />
+                            {/* <Arrow content={i.name} key={i.name} /> */}
                           </>
                         )
                       })
@@ -123,7 +123,7 @@ const Table: React.FC<ViewProps> = ({ timeRange, tableData, onChange }) => {
                 )}
               </LeftContent1>
               <RightContent>
-                {tbdata?.[idx] ? (
+                {/* {tbdata?.[idx] ? (
                   <ReTable
                     rows={3}
                     columns={3}
@@ -132,7 +132,7 @@ const Table: React.FC<ViewProps> = ({ timeRange, tableData, onChange }) => {
                   />
                 ) : (
                   <></>
-                )}
+                )} */}
               </RightContent>
             </MainCcontent>
           </>

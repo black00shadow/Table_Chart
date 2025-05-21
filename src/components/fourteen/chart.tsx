@@ -613,64 +613,64 @@ const Table: React.FC<Props> = ({ timeRange, tableData, tableCenterData }) => {
     ['Male', 'Female', 'Other'],
     ['Presenteo', 'No Shows', 'Rescheduled', 'Cancelled']
   ]
-  return (
-    <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          {_tableData.map((item, idx) => {
-            return (
-              <>
-                <MainCcontent>
-                  <LeftContent1>
-                    <Arrow content={item.content} backgroundColor="#176CC9" />
-                    {tableData[idx].map((it) => {
-                      if (it.time === timeRange) {
-                        return it.info.map((i) => {
-                          return (
-                            <>
-                              <Arrow content={i.name} key={i.name} />
-                            </>
-                          )
-                        })
-                      } else {
-                        return <></>
-                      }
-                    })}
-                  </LeftContent1>
-                  <RightContent>
-                    <BarEcharts
-                      direction="horizontal"
-                      data={item.series}
-                      xAxisData={item.dataName}
-                      isStack={false}
-                      barWidth={30}
-                      height="200px"
-                    />
-                  </RightContent>
-                </MainCcontent>
-              </>
-            )
-          })}
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        {_tableCenterData.map((item, idx) => {
-          return (
-            <>
-              <BarEcharts
-                direction="vertical"
-                data={item}
-                xAxisData={xAxisData[idx]}
-                isStack={false}
-                barWidth={20}
-                height="300px"
-                legend={true}
-              />
-            </>
-          )
-        })}
-      </MiddleContent>
-    </ContentRable>
+  return (<></>
+    // <ContentRable>
+    //   <LeftContent>
+    //     <TableWrapper>
+    //       {_tableData.map((item, idx) => {
+    //         return (
+    //           <>
+    //             <MainCcontent>
+    //               <LeftContent1>
+    //                 <Arrow content={item.content} backgroundColor="#176CC9" />
+    //                 {tableData[idx].map((it) => {
+    //                   if (it.time === timeRange) {
+    //                     return it.info.map((i) => {
+    //                       return (
+    //                         <>
+    //                           <Arrow content={i.name} key={i.name} />
+    //                         </>
+    //                       )
+    //                     })
+    //                   } else {
+    //                     return <></>
+    //                   }
+    //                 })}
+    //               </LeftContent1>
+    //               <RightContent>
+    //                 <BarEcharts
+    //                   direction="horizontal"
+    //                   data={item.series}
+    //                   xAxisData={item.dataName}
+    //                   isStack={false}
+    //                   barWidth={30}
+    //                   height="200px"
+    //                 />
+    //               </RightContent>
+    //             </MainCcontent>
+    //           </>
+    //         )
+    //       })}
+    //     </TableWrapper>
+    //   </LeftContent>
+    //   <MiddleContent>
+    //     {_tableCenterData.map((item, idx) => {
+    //       return (
+    //         <>
+    //           <BarEcharts
+    //             direction="vertical"
+    //             data={item}
+    //             xAxisData={xAxisData[idx]}
+    //             isStack={false}
+    //             barWidth={20}
+    //             height="300px"
+    //             legend={true}
+    //           />
+    //         </>
+    //       )
+    //     })}
+    //   </MiddleContent>
+    // </ContentRable>
   )
 }
 
