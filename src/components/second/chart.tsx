@@ -63,7 +63,7 @@ export interface Props {
   }[]
 }
 // 左侧第一个图表：横向柱状图
-const TestTypesChart: React.FC<Props> = ({ timeRange, chartData }) => {
+export const TestTypesChart: React.FC<Props> = ({ timeRange, chartData }) => {
   const chartRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -170,7 +170,7 @@ const TestTypesChart: React.FC<Props> = ({ timeRange, chartData }) => {
 }
 
 // 左侧第二个图表：堆叠横向柱状图
-const ObservedChart: React.FC<Props> = ({ timeRange, chartData }) => {
+export const ObservedChart: React.FC<Props> = ({ timeRange, chartData }) => {
   const chartRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (!chartRef.current) return
@@ -265,7 +265,7 @@ const ObservedChart: React.FC<Props> = ({ timeRange, chartData }) => {
 }
 
 // 左侧第三个图表：饼图
-const TypeDistributionChart: React.FC<Props> = ({ timeRange, chartData }) => {
+export const TypeDistributionChart: React.FC<Props> = ({ timeRange, chartData }) => {
   const chartRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -334,7 +334,7 @@ const TypeDistributionChart: React.FC<Props> = ({ timeRange, chartData }) => {
 }
 
 // 右侧第一个图表：堆叠横向柱状图
-const MonthlyStatsChart: React.FC<Props> = ({ timeRange, chartData }) => {
+export const MonthlyStatsChart: React.FC<Props> = ({ timeRange, chartData }) => {
   const chartRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -443,7 +443,7 @@ const MonthlyStatsChart: React.FC<Props> = ({ timeRange, chartData }) => {
 }
 
 // 右侧第二个图表：横向柱状图
-const ObservedMonthlyChart: React.FC<Props> = ({ timeRange, chartData }) => {
+export const ObservedMonthlyChart: React.FC<Props> = ({ timeRange, chartData }) => {
   const chartRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -521,7 +521,7 @@ const ObservedMonthlyChart: React.FC<Props> = ({ timeRange, chartData }) => {
 }
 
 // 右侧第三个图表：横向柱状图
-const RenewalChart: React.FC<Props> = ({ timeRange, chartData }) => {
+export const RenewalChart: React.FC<Props> = ({ timeRange, chartData }) => {
   const chartRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

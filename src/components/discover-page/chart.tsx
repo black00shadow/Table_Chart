@@ -9,6 +9,7 @@ import PieEcharts from '../pie/pie-first'
 import PolarBarChart from '../pie/pie-second'
 import { TestTypesChart2 } from '../five/chart'
 import Line from '../line'
+import { MonthlyStatsChart, ObservedChart, ObservedMonthlyChart, RenewalChart, TestTypesChart, TypeDistributionChart } from '../second/chart'
 const ContentRable = styled.div`
   display: flex;
   align-items: center;
@@ -128,6 +129,26 @@ interface CustomProps {
     color: string
   }[]
 }
+
+const SecondChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
+  <ContentRable>
+    <LeftContent>
+      <TableWrapper>
+        <TestTypesChart timeRange={timeRange} chartData={tableData[0]} />
+        <ObservedChart timeRange={timeRange} chartData={tableData[1]} />
+        <TypeDistributionChart
+          timeRange={timeRange}
+          chartData={tableData[2]}
+        />
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      <MonthlyStatsChart timeRange={timeRange} chartData={tableData[3]} />
+      <ObservedMonthlyChart timeRange={timeRange} chartData={tableData[4]} />
+      <RenewalChart timeRange={timeRange} chartData={tableData[5]} />
+    </MiddleContent>
+    </ContentRable>
+
 const ThirdChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
                   <ContentRable>
                     <LeftContent>
@@ -943,6 +964,8 @@ const Table: React.FC<Props> = ({ timeRange, tableData, contentData, yearlyData,
   }, [timeRange, contentData, tableData])
 
   switch(reqType) {
+    case 'second':
+      return <SecondChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
     case 'three':
       return <ThirdChart contentData = {currentChartData} tableData = {tableData} timeRange = {timeRange} yearlyData = {yearlyData} yearlyChartData = {yearlyChartData}/>
     case 'four':
