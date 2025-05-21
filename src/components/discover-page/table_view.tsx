@@ -67,22 +67,24 @@ const TableView: React.FC<ViewProps> = ({
       <MiddleContent>
       {contentNames.map((name,idx) => {
         return (
-          <>
-            {idx !== 0 ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>}
-            <div style={{height: contentNames[idx] ? '52px' : '10px'}} />
+          <React.Fragment key={`middle-${idx}`}>
+            {idx !== 0 ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+            <div style={{height: contentNames[idx] ? '52px' : '10px'}}/>
             <ReTable rows={3} columns={6} initialData={yearlyData[idx]} />
-          </>
+          </React.Fragment>
         );
       })}
       </MiddleContent>
       <RightContent>
         {
           yearlyData.map((data, idx) => {
-            return (<>
-              {idx !== 0 ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>}
-              <div style={{height: contentNames[idx] ? '52px' : '5px'}}/>
-              {data.map(() => <ReTable rows={1} columns={1} key={idx}/>)}
-            </>)
+            return (
+              <React.Fragment key={`right-${idx}`}>
+                {idx !== 0 ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+                <div style={{height: contentNames[idx] ? '52px' : '5px'}}/>
+                {data.map((_, dataIdx) => <ReTable rows={1} columns={1} key={`right-table-${idx}-${dataIdx}`}/>)}
+              </React.Fragment>
+            )
           })
         }
       </RightContent>

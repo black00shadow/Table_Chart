@@ -148,26 +148,27 @@ const Table: React.FC<IProps> = ({
                 style={{ display: 'flex', flexDirection: 'column' }}
               >
                 {row.info.map((cell, colIndex) => {
-                  if(cell.name == content) {
+                  if(cell.name === content) {
                     return (
-                      (
-                        <TableCell key={`${rowIndex}-${colIndex}`}>
-                          <CellInput
-                            type="text"
-                            value={cell.data[0] || ''}
-                            onChange={(e: any) =>
-                              handleCellChange(rowIndex, colIndex, e.target.value)
-                            }
-                          />
-                        </TableCell>
-                      )
-                    )
+                      <TableCell key={`${rowIndex}-${colIndex}`}>
+                        <CellInput
+                          type="text"
+                          value={cell.data[0] || ''}
+                          onChange={(e: any) =>
+                            handleCellChange(rowIndex, colIndex, e.target.value)
+                          }
+                        />
+                      </TableCell>
+                    );
                   }
+                  return null;
                 })}
               </tr>
             ))
           ) : (
-            <>无</>
+            <tr>
+              <TableCell>无</TableCell>
+            </tr>
           )}
         </tbody>
       </StyledTable>

@@ -12,12 +12,11 @@ interface ArrowProps {
   isContent: boolean
 }
 
-const ArrowContainer = styled.div<ArrowProps>`
+const ArrowContainer = styled.div<Omit<ArrowProps, 'isContent' | 'backgroundColor'>>`
   position: relative;
   display: inline-flex;
   align-items: center;
   height: ${(props) => props.height};
-  background: ${(props) => props.backgroundColor};
   color: ${(props) => props.color || '#fff'};
   padding: 0 16px;
   font-size: ${(props) => props.fontSize};
@@ -31,11 +30,9 @@ const ArrowContainer = styled.div<ArrowProps>`
     right: -15px;
     width: 0;
     height: 0;
-    border-top: ${(props) => `${parseInt(props.height || '32') / 2}px`} solid
-      transparent;
-    border-bottom: ${(props) => `${parseInt(props.height || '32') / 2}px`} solid
-      transparent;
-    border-left: 15px solid ${(props) => props.backgroundColor || '#1890ff'};
+    border-top: ${(props) => `${parseInt(props.height || '32') / 2}px solid transparent`};
+    border-bottom: ${(props) => `${parseInt(props.height || '32') / 2}px solid transparent`};
+    border-left: 15px solid ${(props) => props.style?.backgroundColor || '#1890ff'};
   }
 
   &:hover {
@@ -50,12 +47,13 @@ const Arrow: React.FC<ArrowProps> = ({
   content = '',
   onClick
 }) => {
-  console.log(isContent)
+  const backgroundColor = isContent ? '#176CC9' : "#3E93F7";
   return (
     <ArrowContainer
-      isContent = {isContent}
-      style={{width: width}}
-      backgroundColor={isContent ? '#176CC9' : "#3E93F7"}
+      style={{
+        width,
+        backgroundColor
+      }}
       color={color}
       fontSize={isContent ? '16px' : '14px'}
       height={isContent ? '40px' : '36px'}
@@ -63,7 +61,7 @@ const Arrow: React.FC<ArrowProps> = ({
     >
       {content}
     </ArrowContainer>
-  )
-}
+  );
+};
 
-export default Arrow
+export default Arrow;

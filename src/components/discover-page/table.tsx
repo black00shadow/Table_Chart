@@ -81,65 +81,60 @@ const Table: React.FC<ViewProps> = ({ contentNames, collectors, timeRange, table
     <TableWrapper>
       {contentNames.map((contentName, idx) => {
         return (
-          <>
+          <React.Fragment key={`content-${idx}`}>
            <Div>
               {contentName !== "" ? (
                 <div style={{marginTop: 5}}>
                   <Arrow
                     content={contentName}
-                    isContent = {true}
+                    isContent={true}
                     color="#fff"
                     width='30%'
                   />
                 </div>
-              ) : (
-                <></>
-              )}
+              ) : null}
               <Div>
                   {tbdata?.[idx] ? (
                     tbdata[idx].map((it, i) => {
                       if (it.time === timeRange) {
-                        return it.info.map((i) => {
-                          return (<>
-                            <MainCcontent>
-                              <LeftContent1>
-                              <Arrow
-                                width='100%'
-                                isContent = {false}
-                                content={i.name}
-                                key={i.name}
-                                color="#fff"
-                              />
-                            </LeftContent1>
-                            <RightContent>
-                              {tbdata?.[idx] ? (
-                                <ReTable
-                                  rows={3}
-                                  columns={3}
-                                  content={i.name}
-                                  initialData={tbdata[idx]}
-                                  onDataChange={(data) => onDataChange(data, idx)}
-                                />
-                              ) : (
-                                <></>
-                              )}
-                            </RightContent>
-                            </MainCcontent>
-                            </>)
+                        return it.info.map((info, infoIdx) => {
+                          return (
+                            <React.Fragment key={`info-${idx}-${infoIdx}`}>
+                              <MainCcontent>
+                                <LeftContent1>
+                                  <Arrow
+                                    width='100%'
+                                    isContent={false}
+                                    content={info.name}
+                                    color="#fff"
+                                  />
+                                </LeftContent1>
+                                <RightContent>
+                                  {tbdata?.[idx] ? (
+                                    <ReTable
+                                      rows={3}
+                                      columns={3}
+                                      content={info.name}
+                                      initialData={tbdata[idx]}
+                                      onDataChange={(data) => onDataChange(data, idx)}
+                                    />
+                                  ) : null}
+                                </RightContent>
+                              </MainCcontent>
+                            </React.Fragment>
+                          )
                         })
                       } else {
-                        return <></>
+                        return null
                       }
                     })
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
               </Div>
               {
-                idx !== (contentNames.length - 1) ? <Line margin="15px 0" color="#dddddd" width='95%' height='2px' /> : <></>
+                idx !== (contentNames.length - 1) ? <Line margin="15px 0" color="#dddddd" width='95%' height='2px' /> : null
               }
             </Div>
-          </>
+          </React.Fragment>
         )
       })}
     </TableWrapper>
