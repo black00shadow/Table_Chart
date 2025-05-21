@@ -308,6 +308,48 @@ const Icon = ({ type }: { type: string }) => {
 
 const DEFAULT_DATA:DiscoverData[] = [
   {
+    iconUrl: require('@/assets/img/title.png'),
+    tableTitle:'Tests Processed',
+    subTitle: 'Test',
+    collectors: [],
+    reqType: 'second',
+    resType: 'TestTypes',
+    contentData: [
+      {
+        content: '',
+        dataName: [],
+        series: []
+      },
+      {
+        content: '',
+        dataName: [],
+        series: []
+      },
+      {
+        content: '',
+        dataName: [],
+        series: []
+      }
+    ],
+    yearlyData: [
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ],
+      [
+        [32, 29, 29, 27, 25, 26],
+        [47, 35, 38, 40, 39, 37]
+      ],
+      [
+        [32, 29, 29, 27, 25, 26],
+        [6, 10, 14, 15, 11, 14],
+        [47, 35, 38, 40, 39, 37]
+      ]
+    ]
+  },
+  {
     iconUrl: require('@/assets/img/time.png'),
     tableTitle:'Patient Time',
     subTitle: 'Test Time',

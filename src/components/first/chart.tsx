@@ -13,8 +13,9 @@ const PageContainer = styled.div`
   // // padding: 24px;
   background: #f5f5f5;
   // min-height: 100vh;
-  padding-left: 24px;
+  padding-left: 20px;
   padding-top: 24px;
+  padding-right: 35px;
 `
 
 const LeftPanel = styled.div`

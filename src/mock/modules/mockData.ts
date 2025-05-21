@@ -27,15 +27,19 @@ const tableData = {
           time: 'today',
           info: [
             {
-              name: 'Tests Processed',
+              name: 'Urine Drug Screen',
               data: [24]
             },
             {
-              name: 'Tests Pending',
+              name: 'Oral Fluid Drug Screen',
+              data: [24]
+            },
+            {
+              name: 'Urine Drug Test',
               data: [10]
             },
             {
-              name: 'Tests Completed',
+              name: 'Breath Alcohol Screen',
               data: [25]
             }
           ]
@@ -44,15 +48,19 @@ const tableData = {
           time: 'currentWeek',
           info: [
             {
-              name: 'Tests Processed',
+              name: 'Urine Drug Screen',
               data: [65]
             },
             {
-              name: 'Tests Pending',
+              name: 'Oral Fluid Drug Screen',
+              data: [65]
+            },
+            {
+              name: 'Urine Drug Test',
               data: [45]
             },
             {
-              name: 'Tests Completed',
+              name: 'Breath Alcohol Screen',
               data: [45]
             }
           ]
@@ -61,15 +69,19 @@ const tableData = {
           time: 'currentMonth',
           info: [
             {
-              name: 'Tests Processed',
+              name: 'Urine Drug Screen',
               data: [345]
             },
             {
-              name: 'Tests Pending',
+              name: 'Oral Fluid Drug Screen',
+              data: [345]
+            },
+            {
+              name: 'Urine Drug Test',
               data: [120]
             },
             {
-              name: 'Tests Completed',
+              name: 'Breath Alcohol Screen',
               data: [230]
             }
           ]
@@ -78,16 +90,144 @@ const tableData = {
           time: 'currentYear',
           info: [
             {
-              name: 'Tests Processed',
+              name: 'Urine Drug Screen',
               data: [2345]
             },
             {
-              name: 'Tests Pending',
+              name: 'Oral Fluid Drug Screen',
+              data: [2345]
+            },
+            {
+              name: 'Urine Drug Test',
               data: [2790]
             },
             {
-              name: 'Tests Completed',
+              name: 'Breath Alcohol Screen',
               data: [3800]
+            }
+          ]
+        }
+      ],
+      [
+        {
+          time: 'today',
+          info: [
+            {
+              name: 'Observed',
+              data: [30]
+            },
+            {
+              name: 'Witnessed',
+              data: [10]
+            }
+          ]
+        },
+        {
+          time: 'currentWeek',
+          info: [
+            {
+              name: 'Observed',
+              data: [150]
+            },
+            {
+              name: 'Witnessed',
+              data: [45]
+            }
+          ]
+        },
+        {
+          time: 'currentMonth',
+          info: [
+            {
+              name: 'Observed',
+              data: [570]
+            },
+            {
+              name: 'Witnessed',
+              data: [120]
+            }
+          ]
+        },
+        {
+          time: 'currentYear',
+          info: [
+            {
+              name: 'Observed',
+              data: [7800]
+            },
+            {
+              name: 'Witnessed',
+              data: [1500]
+            }
+          ]
+        }
+      ],
+      [
+        {
+          time: 'today',
+          info: [
+            {
+              name: 'Single',
+              data: [12]
+            },
+            {
+              name: 'Multiple',
+              data: [28]
+            },
+            {
+              name: 'Renewal',
+              data: [10]
+            }
+          ]
+        },
+        {
+          time: 'currentWeek',
+          info: [
+            {
+              name: 'Single',
+              data: [23]
+            },
+            {
+              name: 'Multiple',
+              data: [67]
+            },
+            {
+              name: 'Renewal',
+              data: [40]
+            }
+          ]
+        },
+        {
+          time: 'currentMonth',
+          info: [
+            {
+              name: 'Single',
+              data: [100]
+            },
+            {
+              name: 'Multiple',
+              data: [310]
+            },
+            {
+              name: 'Renewal',
+              data: [200]
+            }
+          ]
+        },
+        {
+          time: 'currentYear',
+          info: [
+            {
+              name: 'Single',
+              data: [1340]
+            },
+            {
+              name: 'Multiple',
+              data: [1500]
+            },
+            {
+              name: 'Renewal',
+              data: [1200]
             }
           ]
         }
@@ -2126,39 +2266,31 @@ const tableData = {
           info: [
             {
               name: 'AMP',
-              data: [1200, 2400, 3600, 4800, 6000, 7200]
+              data: [24]
             },
             {
               name: 'BZO',
-              data: [1500, 2700, 3900, 5100, 6300, 7500]
+              data: [10]
             },
             {
               name: 'COC',
-              data: [1800, 3000, 4200, 5400, 6600, 7800]
+              data: [25]
             },
             {
               name: 'MET',
-              data: [2100, 3300, 4500, 5700, 6900, 8100]
+              data: [24]
             },
             {
               name: 'OPI',
-              data: [2400, 3600, 4800, 6000, 7200, 8400]
+              data: [10]
             },
             {
               name: 'OXY',
-              data: [2700, 3900, 5100, 6300, 7500, 8700]
+              data: [25]
             },
             {
               name: 'THC',
-              data: [3000, 4200, 5400, 6600, 7800, 9000]
-            },
-            {
-              name: 'FEN',
-              data: [1300, 2500, 3700, 4900, 6100, 7300]
-            },
-            {
-              name: 'TRA',
-              data: [1600, 2800, 4000, 5200, 6400, 7600]
+              data: [24]
             }
           ]
         },
@@ -2167,39 +2299,31 @@ const tableData = {
           info: [
             {
               name: 'AMP',
-              data: [1100, 2300, 3500, 4700, 5900, 7100]
+              data: [65]
             },
             {
               name: 'BZO',
-              data: [1400, 2600, 3800, 5000, 6200, 7400]
+              data: [45]
             },
             {
               name: 'COC',
-              data: [1700, 2900, 4100, 5300, 6500, 7700]
+              data: [45]
             },
             {
               name: 'MET',
-              data: [2000, 3200, 4400, 5600, 6800, 8000]
+              data: [65]
             },
             {
               name: 'OPI',
-              data: [2300, 3500, 4700, 5900, 7100, 8300]
+              data: [45]
             },
             {
               name: 'OXY',
-              data: [2600, 3800, 5000, 6200, 7400, 8600]
+              data: [45]
             },
             {
               name: 'THC',
-              data: [2900, 4100, 5300, 6500, 7700, 8900]
-            },
-            {
-              name: 'FEN',
-              data: [1200, 2400, 3600, 4800, 6000, 7200]
-            },
-            {
-              name: 'TRA',
-              data: [1500, 2700, 3900, 5100, 6300, 7500]
+              data: [65]
             }
           ]
         },
@@ -2208,39 +2332,118 @@ const tableData = {
           info: [
             {
               name: 'AMP',
-              data: [1300, 2500, 3700, 4900, 6100, 7300]
+              data: [345]
             },
             {
               name: 'BZO',
-              data: [1600, 2800, 4000, 5200, 6400, 7600]
+              data: [120]
             },
             {
               name: 'COC',
-              data: [1900, 3100, 4300, 5500, 6700, 7900]
+              data: [230]
             },
             {
               name: 'MET',
-              data: [2200, 3400, 4600, 5800, 7000, 8200]
+              data: [345]
             },
             {
               name: 'OPI',
-              data: [2500, 3700, 4900, 6100, 7300, 8500]
+              data: [120]
             },
             {
               name: 'OXY',
-              data: [2800, 4000, 5200, 6400, 7600, 8800]
+              data: [230]
             },
             {
               name: 'THC',
-              data: [3100, 4300, 5500, 6700, 7900, 8800]
+              data: [345]
+            }
+          ]
+        },
+        {
+          time: 'currentYear',
+          info: [
+            {
+              name: 'AMP',
+              data: [2345]
             },
             {
-              name: 'FEN',
-              data: [1400, 2600, 3800, 5000, 6200, 7400]
+              name: 'BZO',
+              data: [2790]
             },
             {
-              name: 'TRA',
-              data: [1700, 2900, 4100, 5300, 6500, 7700]
+              name: 'COC',
+              data: [3800]
+            },
+            {
+              name: 'MET',
+              data: [2345]
+            },
+            {
+              name: 'OPI',
+              data: [2790]
+            },
+            {
+              name: 'OXY',
+              data: [3800]
+            },
+            {
+              name: 'THC',
+              data: [2345]
+            }
+          ]
+        }
+      ],
+      [
+        {
+          time: 'today',
+          info: [
+            {
+              name: 'Cannabinoid',
+              data: [25]
+            },
+            {
+              name: 'Cathinone',
+              data: [24]
+            }
+          ]
+        },
+        {
+          time: 'currentWeek',
+          info: [
+            {
+              name: 'Cannabinoid',
+              data: [45]
+            },
+            {
+              name: 'Cathinone',
+              data: [65]
+            }
+          ]
+        },
+        {
+          time: 'currentMonth',
+          info: [
+            {
+              name: 'Cannabinoid',
+              data: [230]
+            },
+            {
+              name: 'Cathinone',
+              data: [345]
+            }
+          ]
+        },
+        {
+          time: 'currentYear',
+          info: [
+            {
+              name: 'Cannabinoid',
+              data: [3800]
+            },
+            {
+              name: 'Cathinone',
+              data: [2345]
             }
           ]
         }
