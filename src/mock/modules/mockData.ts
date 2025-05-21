@@ -3401,7 +3401,7 @@ const tableData = {
               data: [10]
             },
             {
-              name: 'Breath (Negative)',
+              name: 'Sent to Lab',
               data: [15]
             }
           ]
@@ -3422,7 +3422,7 @@ const tableData = {
               data: [40]
             },
             {
-              name: 'Breath (Negative)',
+              name: 'Sent to Lab',
               data: [60]
             }
           ]
@@ -3443,7 +3443,7 @@ const tableData = {
               data: [200]
             },
             {
-              name: 'Breath (Negative)',
+              name: 'Sent to Lab',
               data: [240]
             }
           ]
@@ -3464,7 +3464,7 @@ const tableData = {
               data: [300]
             },
             {
-              name: 'Breath (Negative)',
+              name: 'Sent to Lab',
               data: [500]
             }
           ]
