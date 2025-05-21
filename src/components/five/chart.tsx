@@ -61,7 +61,7 @@ const ChartContainer = styled.div`
   // border-radius: 8px;
   // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   // padding: 20px;
-  height: 450px;
+  height: 600px;
 `
 // const data = [
 //   {

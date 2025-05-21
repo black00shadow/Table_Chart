@@ -179,10 +179,10 @@ const PatientItem = styled.div`
   }
   .bar {
     flex: 1;
-    height: 14px;
+    height: 25px;
     background: #003366;
     margin: 0 12px;
-    border-radius: 7px;
+    border-radius: 0px;
     transition: all 0.3s ease;
   }
   .number {

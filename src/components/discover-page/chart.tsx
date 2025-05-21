@@ -47,6 +47,7 @@ const MainCcontent = styled.div`
   // padding: 16px;
   display: flex;
   padding: 10px 0 0 10px;
+  position: relative;
 `
 
 const LeftContent1 = styled.div`
@@ -147,833 +148,768 @@ const SecondChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, 
       <ObservedMonthlyChart timeRange={timeRange} chartData={tableData[4]} />
       <RenewalChart timeRange={timeRange} chartData={tableData[5]} />
     </MiddleContent>
-    </ContentRable>
+  </ContentRable>
 
-const ThirdChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
-                  <ContentRable>
-                    <LeftContent>
-                      <TableWrapper>
-                        {contentData.map((item, idx) => {
-                          return (
-                            <>
-                              <MainCcontent>
-                                <LeftContent1>
-                                  <Arrow content={item.content} isContent={true}/>
-                                    {tableData[idx].map((it) => {
-                                      if (it.time === timeRange) {
-                                        return it.info.map((i) => {
-                                          return (
-                                            <>
-                                              <Arrow content={i.name} key={i.name} isContent={false} width='60%'/>
-                                            </>
-                                          )
-                                        })
-                                      } else {
-                                        return <></>
-                                      }
-                                    })}
-                                  </LeftContent1>
-                                  <RightContent>
-                                    <BarEcharts
-                                      direction="horizontal"
-                                      data={item.series}
-                                      xAxisData={item.dataName}
-                                      isStack={false}
-                                      barWidth={30}
-                                      height="200px"
-                                    />
-                                  </RightContent>
-                                </MainCcontent>
-                                {
-                                  idx !== (contentData.length - 1) ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>
-                                }
-                              </>
-                            )
-                        })
-                        }
-                      </TableWrapper>
-                    </LeftContent>
-                    <MiddleContent>
-                      {
-                        yearlyData.map((data, idx) => {
-                          const yearData = yearlyChartData(data, tableData[idx])
-                          return (<>
-                            {idx !== 0 ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>}
-                            <BarEcharts key = {idx}
-                              direction="horizontal"
-                              data={yearData}
-                              xAxisData={[]}
-                              isStack={true}
-                              barWidth={10}
-                              height="210px"
-                            />
-                          </>)
-                        })
-                      }
-                    </MiddleContent>
-                  </ContentRable>
-
-const FourthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const ThirdChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
   <ContentRable>
     <LeftContent>
       <TableWrapper>
-        {contentData.map((item, idx) => {
-          return (
-            <>
-              <MainCcontent>
-                <LeftContent1>
-                  <Arrow content={item.content} isContent={true} width='100%' />
-                  {tableData[idx].map((it) => {
-                    if (it.time === timeRange) {
-                      return it.info.map((i) => {
-                        return (
-                          <>
-                            <Arrow content={i.name} key={i.name} isContent={false} width='60%' />
-                          </>
-                        )
-                      })
-                    } else {
-                      return <></>
-                    }
-                  })}
-                </LeftContent1>
-                <RightContent>
-                  <BarEcharts
-                    direction="horizontal"
-                    data={item.series}
-                    xAxisData={item.dataName}
-                    isStack={false}
-                    barWidth={30}
-                    height="200px"
-                  />
-                </RightContent>
-              </MainCcontent>
-              {
-                idx !== (contentData.length - 1) ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>
-              }
-            </>
-          )
-        })}
+        {contentData.map((item, idx) => (
+          <React.Fragment key={`content-${idx}`}>
+            <MainCcontent>
+              <LeftContent1>
+                <Arrow content={item.content} isContent={true}/>
+                {tableData?.[idx]
+                  ? tableData[idx]
+                      .filter(it => it.time === timeRange)
+                      .flatMap((it, tableIdx) =>
+                        it.info.map((i, infoIdx) => (
+                          <React.Fragment key={`info-${idx}-${tableIdx}-${infoIdx}`}>
+                            <Arrow content={i.name} isContent={false} width='60%'/>
+                          </React.Fragment>
+                        ))
+                      )
+                  : null
+                }
+              </LeftContent1>
+              <RightContent>
+                <BarEcharts
+                  direction="horizontal"
+                  data={item.series}
+                  xAxisData={item.dataName}
+                  isStack={false}
+                  barWidth={30}
+                  height="200px"
+                />
+              </RightContent>
+            </MainCcontent>
+            {idx !== (contentData.length - 1) ? <Line key={`line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+          </React.Fragment>
+        ))}
       </TableWrapper>
     </LeftContent>
     <MiddleContent>
-      {
-        yearlyData.map((data, idx) => {
-          const yearData = yearlyChartData(data, tableData[idx])
-          return (<>
-            {idx !== 0 ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>}
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <React.Fragment key={`yearly-${idx}`}>
+            {idx !== 0 ? <Line key={`yearly-line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
             <BarEcharts
-              key= {idx}
+              key={`bar-${idx}`}
+              direction="horizontal"
+              data={yearData}
+              xAxisData={[]}
+              isStack={true}
+              barWidth={25}
+              height="210px"
+            />
+          </React.Fragment>
+        )
+      })}
+    </MiddleContent>
+  </ContentRable>
+
+const FourthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
+  <ContentRable>
+    <LeftContent>
+      <TableWrapper>
+        {contentData.map((item, idx) => (
+          <React.Fragment key={`content-${idx}`}>
+            <MainCcontent>
+              <LeftContent1>
+                <Arrow content={item.content} isContent={true} width='100%' />
+                {tableData[idx]
+                  .filter(it => it.time === timeRange)
+                  .flatMap((it, tableIdx) =>
+                    it.info.map((i, infoIdx) => (
+                      <React.Fragment key={`info-${idx}-${tableIdx}-${infoIdx}`}>
+                        <Arrow content={i.name} isContent={false} width='60%' />
+                      </React.Fragment>
+                    ))
+                  )
+                }
+              </LeftContent1>
+              <RightContent>
+                <BarEcharts
+                  direction="horizontal"
+                  data={item.series}
+                  xAxisData={item.dataName}
+                  isStack={false}
+                  barWidth={30}
+                  height="200px"
+                />
+              </RightContent>
+            </MainCcontent>
+            {idx !== (contentData.length - 1) ? <Line key={`line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+          </React.Fragment>
+        ))}
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <React.Fragment key={`yearly-${idx}`}>
+            {idx !== 0 ? <Line key={`yearly-line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+            <BarEcharts
+              key={`bar-${idx}`}
               direction="horizontal"
               data={yearData}
               xAxisData={[]}
               isStack={true}
               height="210px"
             />
-          </>)
-        })
-      }
+          </React.Fragment>
+        )
+      })}
     </MiddleContent>
   </ContentRable>
 
-const FifthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
-  <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          <MainCcontent style={{padding: '0px'}}>
-            <RightContent>
-              <TestTypesChart2 timeRange={timeRange} chartData={tableData[0]} />
-            </RightContent>
-          </MainCcontent>
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        {
-          yearlyData.map((data, idx) => {
-            const yearData = yearlyChartData(data, tableData[idx])
-            return (
-              <BarEcharts
-                key = {idx}
-                direction="horizontal"
-                data={yearData}
-                xAxisData={[]}
-                isStack={false}
-                barWidth={30}
-                height="100%"
-              />
-            )
-          })
-        }
-      </MiddleContent>
-  </ContentRable>
-
-const SixthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const FifthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
   <ContentRable>
     <LeftContent>
       <TableWrapper>
-        {contentData.map((item, idx) => {
-          return (
-            <>
-              <MainCcontent>
-                <LeftContent1>
-                  <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%' />
-                  {tableData[idx].map((it) => {
-                    if (it.time === timeRange) {
-                      return it.info.map((i) => {
-                        return (
-                          <>
-                            <Arrow content={i.name} key={i.name} isContent={false} width='60%'/>
-                          </>
-                        )
-                      })
-                    } else {
-                      return <></>
-                    }
-                  })}
-                </LeftContent1>
-                <RightContent>
-                  <BarEcharts
-                    direction="horizontal"
-                    data={item.series}
-                    xAxisData={item.dataName}
-                    isStack={false}
-                    barWidth={30}
-                    height="170px"
-                  />
-                </RightContent>
-              </MainCcontent>
-              {
-                idx !== (contentData.length - 1) ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>
-              }
-            </>
-          )
-        })}
+        <MainCcontent style={{padding: '0px'}}>
+          <RightContent>
+            <TestTypesChart2 timeRange={timeRange} chartData={tableData[0]} />
+          </RightContent>
+        </MainCcontent>
       </TableWrapper>
     </LeftContent>
     <MiddleContent>
-    {
-      yearlyData.map((data, idx) => {
+      {yearlyData.map((data, idx) => {
         const yearData = yearlyChartData(data, tableData[idx])
-        return (<>
-          {idx !== 0 ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>}
+        return (
           <BarEcharts
-            key = {idx}
+            key={`bar-${idx}`}
             direction="horizontal"
             data={yearData}
             xAxisData={[]}
             isStack={false}
-            barWidth={10}
-            height="180px"
+            barWidth={30}
+            height="690px"
           />
-        </>)
-      })
-    }
+        )
+      })}
     </MiddleContent>
   </ContentRable>
-const SeventhChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
-  <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          {contentData.map((item, idx) => {
-            return (
-              <>
-                <MainCcontent>
-                  <LeftContent1>
-                    {
-                      item.content != "" ? <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%'/> : <></>
-                    }
 
-                    {tableData?.[idx] ? (
-                      tableData[idx].map((it) => {
-                        if (it.time === timeRange) {
-                          return it.info.map((i) => {
-                            return (
-                              <>
-                                <Arrow content={i.name} key={i.name} isContent={false} width='60%'/>
-                              </>
-                            )
-                          })
-                        } else {
-                          return <></>
-                        }
-                      })
-                    ) : (
-                      <></>
-                    )}
-                  </LeftContent1>
-                  <RightContent>
-                    <BarEcharts
-                      direction="horizontal"
-                      data={item.series}
-                      xAxisData={item.dataName}
-                      isStack={false}
-                      barWidth={30}
-                      height="170px"
-                    />
-                  </RightContent>
-                </MainCcontent>
-                {
-                idx !== (contentData.length - 1) ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>
-                }
-              </>
-            )
-          })}
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        {
-          yearlyData.map((data, idx) => {
-            const yearData = yearlyChartData(data, tableData[idx])
-            return (<>
-              {idx !== 0 ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>}
-              <BarEcharts
-                key = {idx}
-                direction="horizontal"
-                data={yearData}
-                xAxisData={[]}
-                isStack={false}
-                barWidth={10}
-                height="180px"
-              />
-            </>)
-          })
-        }
-      </MiddleContent>
-    </ContentRable>
-
-const NinethChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const SixthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
   <ContentRable>
     <LeftContent>
-        <TableWrapper>
-          {contentData.map((item, idx) => {
-            return (
-              <>
-                <MainCcontent style={{ marginTop: '10%'}}>
-                  <LeftContent1 style={{ marginTop: '7%'}}>
-                    {
-                      item.content != "" ? <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%'/> : <></>
-                    }
-
-                    {tableData?.[idx] ? (
-                      tableData[idx].map((it) => {
-                        if (it.time === timeRange) {
-                          return it.info.map((i) => {
-                            return (
-                              <>
-                                <Arrow content={i.name} key={i.name} isContent={false} width='60%'/>
-                              </>
-                            )
-                          })
-                        } else {
-                          return <></>
-                        }
-                      })
-                    ) : (
-                      <></>
-                    )}
-                  </LeftContent1>
-                  <RightContent>
-                    <BarEcharts
-                      direction="horizontal"
-                      data={item.series}
-                      xAxisData={item.dataName}
-                      isStack={false}
-                      barWidth={30}
-                      height="150px"
-                    />
-                  </RightContent>
-                </MainCcontent>
-                {
-                idx !== (contentData.length - 1) ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>
+      <TableWrapper>
+        {contentData.map((item, idx) => (
+          <React.Fragment key={`content-${idx}`}>
+            <MainCcontent>
+              <LeftContent1>
+                <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%' />
+                {tableData[idx]
+                  .filter(it => it.time === timeRange)
+                  .flatMap((it, tableIdx) =>
+                    it.info.map((i, infoIdx) => (
+                      <React.Fragment key={`info-${idx}-${tableIdx}-${infoIdx}`}>
+                        <Arrow content={i.name} isContent={false} width='60%'/>
+                      </React.Fragment>
+                    ))
+                  )
                 }
-              </>
-            )
-          })}
-        </TableWrapper>
-      </LeftContent>
+              </LeftContent1>
+              <RightContent>
+                <BarEcharts
+                  direction="horizontal"
+                  data={item.series}
+                  xAxisData={item.dataName}
+                  isStack={false}
+                  barWidth={30}
+                  height="180px"
+                />
+              </RightContent>
+            </MainCcontent>
+            {idx !== (contentData.length - 1) ? <Line key={`line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+          </React.Fragment>
+        ))}
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <React.Fragment key={`yearly-${idx}`}>
+            {idx !== 0 ? <Line key={`yearly-line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+            <BarEcharts
+              key={`bar-${idx}`}
+              direction="horizontal"
+              data={yearData}
+              xAxisData={[]}
+              isStack={false}
+              barWidth={10}
+              height="190px"
+            />
+          </React.Fragment>
+        )
+      })}
+    </MiddleContent>
+  </ContentRable>
+
+const SeventhChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
+  <ContentRable>
+    <LeftContent>
+      <TableWrapper>
+        {contentData.map((item, idx) => (
+          <React.Fragment key={`content-${idx}`}>
+            <MainCcontent>
+              <LeftContent1>
+                {item.content !== "" ? <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%'/> : null}
+                {tableData?.[idx]
+                  ? tableData[idx]
+                      .filter(it => it.time === timeRange)
+                      .flatMap((it, tableIdx) =>
+                        it.info.map((i, infoIdx) => (
+                          <React.Fragment key={`info-${idx}-${tableIdx}-${infoIdx}`}>
+                            <Arrow content={i.name} isContent={false} width='60%'/>
+                          </React.Fragment>
+                        ))
+                      )
+                  : null
+                }
+              </LeftContent1>
+              <RightContent>
+                <BarEcharts
+                  direction="horizontal"
+                  data={item.series}
+                  xAxisData={item.dataName}
+                  isStack={false}
+                  barWidth={30}
+                  height="180px"
+                />
+              </RightContent>
+            </MainCcontent>
+            {idx !== (contentData.length - 1) ? <Line key={`line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+          </React.Fragment>
+        ))}
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <React.Fragment key={`yearly-${idx}`}>
+            {idx !== 0 ? <Line key={`yearly-line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+            <BarEcharts
+              key={`bar-${idx}`}
+              direction="horizontal"
+              data={yearData}
+              xAxisData={[]}
+              isStack={false}
+              barWidth={10}
+              height="190px"
+            />
+          </React.Fragment>
+        )
+      })}
+    </MiddleContent>
+  </ContentRable>
+
+const NinethChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
+  <ContentRable>
+    <LeftContent>
+      <TableWrapper>
+        {contentData.map((item, idx) => (
+          <React.Fragment key={`content-${idx}`}>
+            <MainCcontent style={{ marginTop: '10%'}}>
+              <LeftContent1 style={{ marginTop: '7%'}}>
+                {item.content !== "" ? <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%'/> : null}
+                {tableData?.[idx]
+                  ? tableData[idx]
+                      .filter(it => it.time === timeRange)
+                      .flatMap((it, tableIdx) =>
+                        it.info.map((i, infoIdx) => (
+                          <React.Fragment key={`info-${idx}-${tableIdx}-${infoIdx}`}>
+                            <Arrow content={i.name} isContent={false} width='60%'/>
+                          </React.Fragment>
+                        ))
+                      )
+                  : null
+                }
+              </LeftContent1>
+              <RightContent>
+                <BarEcharts
+                  direction="horizontal"
+                  data={item.series}
+                  xAxisData={item.dataName}
+                  isStack={false}
+                  barWidth={30}
+                  height="150px"
+                />
+              </RightContent>
+            </MainCcontent>
+            {idx !== (contentData.length - 1) ? <Line key={`line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+          </React.Fragment>
+        ))}
+      </TableWrapper>
+    </LeftContent>
     <MiddleContent>
       <TypeDistributionChart
-            timeRange={timeRange}
-            chartData={tableData[0]}
-          />
+        timeRange={timeRange}
+        chartData={tableData[0]}
+      />
     </MiddleContent>
-    </ContentRable>
+  </ContentRable>
 
-const TenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const TenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
   <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          {contentData.map((item, idx) => {
-            return (
-              <>
-                <MainCcontent>
-                  <LeftContent1>
-                    <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%'/>
-                    {tableData[idx].map((it) => {
-                      if (it.time === timeRange) {
-                        return it.info.map((i) => {
-                          return (
-                            <>
-                              <Arrow content={i.name} key={i.name} isContent={false} width='60%'/>
-                            </>
-                          )
-                        })
-                      } else {
-                        return <></>
-                      }
-                    })}
-                  </LeftContent1>
-                  <RightContent>
-                    <BarEcharts
-                      direction="horizontal"
-                      data={item.series}
-                      xAxisData={item.dataName}
-                      isStack={false}
-                      barWidth={30}
-                      height="170px"
-                    />
-                  </RightContent>
-                </MainCcontent>
-                {
-                idx !== (contentData.length - 1) ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>
+    <LeftContent>
+      <TableWrapper>
+        {contentData.map((item, idx) => (
+          <React.Fragment key={`content-${idx}`}>
+            <MainCcontent>
+              <LeftContent1>
+                <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%'/>
+                {tableData[idx]
+                  .filter(it => it.time === timeRange)
+                  .flatMap((it, tableIdx) =>
+                    it.info.map((i, infoIdx) => (
+                      <React.Fragment key={`info-${idx}-${tableIdx}-${infoIdx}`}>
+                        <Arrow content={i.name} isContent={false} width='60%'/>
+                      </React.Fragment>
+                    ))
+                  )
                 }
-              </>
-            )
-          })}
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        {
-          yearlyData.map((data, idx) => {
-            const yearData = yearlyChartData(data, tableData[idx])
-            return (<>
-              {idx !== 0 ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>}
-              <BarEcharts
-                key = {idx}
-                direction="vertical"
-                data={yearData}
-                xAxisData={[]}
-                isStack={false}
-                barWidth={20}
-                height="180px"
-              />
-            </>)
-          })
-        }
-      </MiddleContent>
-    </ContentRable>
-const EleventhChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
-  <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          <MainCcontent>
-            <LeftContent1>
-              <Arrow content="Negative" backgroundColor="#176CC9" isContent={true}/>
-            </LeftContent1>
-            <RightContent>
-              <BarEcharts
-                direction="horizontal"
-                data={contentData[0].series}
-                xAxisData={contentData[0].dataName}
-                isStack={false}
-                barWidth={20}
-                height="350px"
-              />
-            </RightContent>
-          </MainCcontent>
-          <MainCcontent>
-            <LeftContent1>
-              <Arrow content="Synthetic" backgroundColor="#176CC9" isContent={true}/>
-            </LeftContent1>
-            <RightContent>
-              <PieEcharts
-                data={contentData[1].series}
-                height="300px"
-                radius={['38%', '70%']}
-                centerText="49"
-                showPercentage={true}
-                legendPosition="top"
-              />
-            </RightContent>
-          </MainCcontent>
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        {
-          yearlyData.map((data, idx) => {
-            const yearData = yearlyChartData(data, tableData[idx])
-            return (
-              <LineChart
-                key = {idx}
-                data={yearData}
-                xAxisData={[]}
-                height="300px"
-                showSymbol={true}
-                yAxisMax={3600}
-                yAxisMin={0}
-                yAxisInterval={600}
-                smooth={true}
-                legend={{
-                  show: true,
-                  bottom: 0,
-                  right: 30
-                }}
-              />
-            )
-          })
-        }
-      </MiddleContent>
-    </ContentRable>
-const TwelvethChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
-  <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          <MainCcontent>
-            <LeftContent1>
-              <Arrow content="Negative" backgroundColor="#176CC9" isContent={true}/>
-            </LeftContent1>
-            <RightContent>
-              <BarEcharts
-                direction="horizontal"
-                data={contentData[0].series}
-                xAxisData={contentData[0].dataName}
-                isStack={false}
-                barWidth={20}
-                height="350px"
-              />
-            </RightContent>
-          </MainCcontent>
-          <MainCcontent>
-            <LeftContent1>
-              <Arrow content="Synthetic" backgroundColor="#176CC9" isContent={true}/>
-            </LeftContent1>
-            <RightContent>
-              <PieEcharts
-                data={contentData[1].series}
-                height="300px"
-                radius={['38%', '70%']}
-                centerText="49"
-                showPercentage={true}
-                legendPosition="top"
-              />
-            </RightContent>
-          </MainCcontent>
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        {
-          yearlyData.map((data, idx) => {
-            const yearData = yearlyChartData(data, tableData[idx])
-            return (
-              <LineChart
-            key = {idx}
+              </LeftContent1>
+              <RightContent>
+                <BarEcharts
+                  direction="horizontal"
+                  data={item.series}
+                  xAxisData={item.dataName}
+                  isStack={false}
+                  barWidth={30}
+                  height="170px"
+                />
+              </RightContent>
+            </MainCcontent>
+            {idx !== (contentData.length - 1) ? <Line key={`line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+          </React.Fragment>
+        ))}
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <React.Fragment key={`yearly-${idx}`}>
+            {idx !== 0 ? <Line key={`yearly-line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+            <BarEcharts
+              key={`bar-${idx}`}
+              direction="vertical"
+              data={yearData}
+              xAxisData={[]}
+              isStack={false}
+              barWidth={30}
+              height="180px"
+            />
+          </React.Fragment>
+        )
+      })}
+    </MiddleContent>
+  </ContentRable>
 
-                data={yearData}
-                xAxisData={[]}
-                height="300px"
-                showSymbol={true}
-                yAxisMax={3600}
-                yAxisMin={0}
-                yAxisInterval={600}
-                smooth={true}
-                legend={{
-                  show: true,
-                  bottom: 0,
-                  right: 30
-                }}
-              />
-            )
-          })
-        }
-      </MiddleContent>
-    </ContentRable>
-const ThirteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+const EleventhChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
   <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          <MainCcontent>
-            <LeftContent1>
-              <Arrow content="Negative" backgroundColor="#176CC9" isContent={true}/>
-            </LeftContent1>
-            <RightContent>
-              <BarEcharts
-                direction="horizontal"
-                data={contentData[0].series}
-                xAxisData={contentData[0].dataName}
-                isStack={false}
-                barWidth={20}
-                height="350px"
-              />
-            </RightContent>
-          </MainCcontent>
-          <MainCcontent>
-            <LeftContent1>
-              <Arrow content="Synthetic" backgroundColor="#176CC9" isContent={true}/>
-            </LeftContent1>
-            <RightContent>
-              <PieEcharts
-                data={contentData[1].series}
-                height="300px"
-                radius={['38%', '70%']}
-                centerText="49"
-                showPercentage={true}
-                legendPosition="top"
-              />
-            </RightContent>
-          </MainCcontent>
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        {
-          yearlyData.map((data, idx) => {
-            const yearData = yearlyChartData(data, tableData[idx])
-            return (
-              <LineChart
-            key = {idx}
+    <LeftContent>
+      <TableWrapper>
+        <MainCcontent style={{padding: 0, marginLeft: '1%', marginTop: '1%'}}>
+          <LeftContent1 style={{position: 'absolute'}}>
+            <Arrow content="Negative" backgroundColor="#176CC9" isContent={true}/>
+          </LeftContent1>
+          <RightContent style={{position: 'inherit'}}>
+            <BarEcharts
+              direction="horizontal"
+              data={contentData[0].series}
+              xAxisData={contentData[0].dataName}
+              isStack={false}
+              barWidth={20}
+              height="350px"
+            />
+          </RightContent>
+        </MainCcontent>
+        <MainCcontent style={{padding: 0, marginLeft: '1%', marginTop: '1%'}}>
+          <LeftContent1 style={{position: 'absolute'}}>
+            <Arrow content="Synthetic" backgroundColor="#176CC9" isContent={true}/>
+          </LeftContent1>
+          <RightContent style={{position: 'inherit', marginTop: '5%'}}>
+            <PieEcharts
+              data={contentData[1].series}
+              height="300px"
+              radius={['38%', '70%']}
+              centerText="49"
+              showPercentage={true}
+              legendPosition="top"
+            />
+          </RightContent>
+        </MainCcontent>
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <div style={{marginTop: '5%'}} key={`yearly-${idx}`}>
+            <LineChart
+              key={`line-${idx}`}
+              data={yearData}
+              xAxisData={[]}
+              height="300px"
+              showSymbol={true}
+              yAxisMax={3600}
+              yAxisMin={0}
+              yAxisInterval={600}
+              smooth={true}
+              legend={{
+                show: true,
+                bottom: 0,
+                right: 30
+              }}
+            />
+          </div>
+        )
+      })}
+    </MiddleContent>
+  </ContentRable>
+
+const TwelvethChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
+  <ContentRable>
+    <LeftContent>
+      <TableWrapper>
+        <MainCcontent style={{padding: 0, marginLeft: '1%', marginTop: '1%'}}>
+          <LeftContent1 style={{position: 'absolute'}}>
+            <Arrow content="Negative" backgroundColor="#176CC9" isContent={true}/>
+          </LeftContent1>
+          <RightContent style={{position: 'inherit'}}>
+            <BarEcharts
+              direction="horizontal"
+              data={contentData[0].series}
+              xAxisData={contentData[0].dataName}
+              isStack={false}
+              barWidth={20}
+              height="350px"
+            />
+          </RightContent>
+        </MainCcontent>
+        <MainCcontent style={{padding: 0, marginLeft: '1%', marginTop: '1%'}}>
+          <LeftContent1 style={{position: 'absolute'}}>
+            <Arrow content="Synthetic" backgroundColor="#176CC9" isContent={true}/>
+          </LeftContent1>
+          <RightContent style={{position: 'inherit', marginTop: '5%'}}>
+            <PieEcharts
+              data={contentData[1].series}
+              height="300px"
+              radius={['38%', '70%']}
+              centerText="49"
+              showPercentage={true}
+              legendPosition="top"
+            />
+          </RightContent>
+        </MainCcontent>
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <div style={{marginTop: '5%'}} key={`yearly-${idx}`}>
+            <LineChart
+              data={yearData}
+              xAxisData={[]}
+              height="300px"
+              showSymbol={true}
+              yAxisMax={3600}
+              yAxisMin={0}
+              yAxisInterval={600}
+              smooth={true}
+              legend={{
+                show: true,
+                bottom: 0,
+                right: 30
+              }}
+            />
+          </div>
+        )
+      })}
+    </MiddleContent>
+  </ContentRable>
+
+const ThirteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
+  <ContentRable>
+    <LeftContent>
+      <TableWrapper>
+        <MainCcontent style={{padding: 0, marginLeft: '1%', marginTop: '1%'}}>
+          <LeftContent1 style={{position: 'absolute'}}>
+            <Arrow content="Negative" backgroundColor="#176CC9" isContent={true}/>
+          </LeftContent1>
+          <RightContent style={{position: 'inherit'}}>
+            <BarEcharts
+              direction="horizontal"
+              data={contentData[0].series}
+              xAxisData={contentData[0].dataName}
+              isStack={false}
+              barWidth={20}
+              height="350px"
+            />
+          </RightContent>
+        </MainCcontent>
+        <MainCcontent style={{padding: 0, marginLeft: '1%'}}>
+          <LeftContent1 style={{position: 'absolute'}}>
+            <Arrow content="Synthetic" backgroundColor="#176CC9" isContent={true}/>
+          </LeftContent1>
+          <RightContent style={{position: 'inherit', marginTop: '5%'}}>
+            <PieEcharts
+              data={contentData[1].series}
+              height="300px"
+              radius={['38%', '70%']}
+              centerText="49"
+              showPercentage={true}
+              legendPosition="top"
+            />
+          </RightContent>
+        </MainCcontent>
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <div style={{marginTop: '5%'}} key={`yearly-${idx}`}>
+            <LineChart
+              data={yearData}
+              xAxisData={[]}
+              height="300px"
+              showSymbol={true}
+              yAxisMax={3600}
+              yAxisMin={0}
+              yAxisInterval={600}
+              smooth={true}
+              legend={{
+                show: true,
+                bottom: 0,
+                right: 30
+              }}
+            />
+          </div>
+        )
+      })}
+    </MiddleContent>
+  </ContentRable>
+
+const FourteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
+  <ContentRable>
+    <LeftContent>
+      <TableWrapper>
+        <MainCcontent style={{padding: 0}}>
+          <RightContent>
+            <PolarBarChart
+              data={contentData[0].series}
+              height="350px"
+              startAngle={90}
+              endAngle={-270}
+              radius={['30%', '80%']}
+              showLabel={true}
+            />
+          </RightContent>
+        </MainCcontent>
+        <MainCcontent>
+          <LeftContent1 style={{position: 'absolute'}}>
+            <Arrow content="Collectors" backgroundColor="#176CC9" isContent={true}/>
+          </LeftContent1>
+          <RightContent style={{position: 'inherit'}}>
+            <BarEcharts
+              direction="horizontal"
+              data={contentData[1].series}
+              xAxisData={contentData[1].dataName}
+              isStack={false}
+              barWidth={20}
+              height="350px"
+            />
+          </RightContent>
+        </MainCcontent>
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <div style={{marginTop: '6%'}} key={`yearly-${idx}`}>
+            <LineChart
+              data={yearData}
+              xAxisData={[]}
+              height="300px"
+              showSymbol={true}
+              yAxisMax={3000}
+              yAxisMin={0}
+              yAxisInterval={600}
+              smooth={true}
+              legend={{
+                show: true,
+                right: 30,
+                bottom: 0
+              }}
+            />
+          </div>
+        )
+      })}
+    </MiddleContent>
+  </ContentRable>
+
+const FifteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
+  <ContentRable>
+    <LeftContent>
+      <TableWrapper>
+        <MainCcontent style={{padding: '0'}}>
+          <RightContent>
+            <TestTypesChart2 timeRange={timeRange} chartData={tableData[0]} />
+          </RightContent>
+        </MainCcontent>
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <LineChart
+            key={`line-${idx}`}
             data={yearData}
-                xAxisData={[]}
-                height="300px"
-                showSymbol={true}
-                yAxisMax={3600}
-                yAxisMin={0}
-                yAxisInterval={600}
-                smooth={true}
-                legend={{
-                  show: true,
-                  bottom: 0,
-                  right: 30
-                }}
-              />
-            )
-          })
-        }
-      </MiddleContent>
-    </ContentRable>
-const FourteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+            xAxisData={[]}
+            height="470px"
+            showSymbol={true}
+            yAxisMax={10}
+            yAxisMin={0}
+            yAxisInterval={1}
+            smooth={true}
+            legend={{
+              show: true,
+              right: 30,
+              orient: 'vertical'
+            }}
+            showGrid={true}
+            labelShow={true}
+          />
+        )
+      })}
+    </MiddleContent>
+  </ContentRable>
+
+const SixteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
   <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          <MainCcontent style={{padding: '0'}}>
-            <RightContent>
-              <PolarBarChart
-                data={contentData[0].series}
-                height="350px"
-                startAngle={90}
-                endAngle={-270}
-                radius={['30%', '80%']}
-                showLabel={true}
-              />
-            </RightContent>
-          </MainCcontent>
-          <MainCcontent style={{padding: '0'}}>
-            <LeftContent1>
-              <Arrow content="Collectors" backgroundColor="#176CC9" isContent={true}/>
-            </LeftContent1>
-            <RightContent>
-              <BarEcharts
-                direction="horizontal"
-                data={contentData[1].series}
-                xAxisData={contentData[1].dataName}
-                isStack={false}
-                barWidth={20}
-                height="350px"
-              />
-            </RightContent>
-          </MainCcontent>
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        {
-          yearlyData.map((data, idx) => {
-            const yearData = yearlyChartData(data, tableData[idx])
-            return (
-              <LineChart
-            key = {idx}
-            data={yearData}
-                xAxisData={[]}
-                height="300px"
-                showSymbol={true}
-                yAxisMax={3000}
-                yAxisMin={0}
-                yAxisInterval={600}
-                smooth={true}
-                legend={{
-                  show: true,
-                  right: 30,
-                  bottom: 0
-                }}
-              />
-            )
-          })
-        }
-      </MiddleContent>
-    </ContentRable>
-const FifteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
-  <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          <MainCcontent style={{padding: '0'}}>
-            <RightContent>
-              <TestTypesChart2 timeRange={timeRange} chartData={tableData[0]} />
-            </RightContent>
-          </MainCcontent>
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        {
-          yearlyData.map((data, idx) => {
-            const yearData = yearlyChartData(data, tableData[idx])
-            return (
-              <LineChart
-            key = {idx}
-            data={yearData}
-                xAxisData={[]}
-                height="470px"
-                showSymbol={true}
-                yAxisMax={10}
-                yAxisMin={0}
-                yAxisInterval={1}
-                smooth={true}
-                legend={{
-                  show: true,
-                  right: 30,
-                  orient: 'vertical'
-                }}
-                showGrid={true}
-                labelShow={true}
-              />
-            )
-          })
-        }
-      </MiddleContent>
-    </ContentRable>
-const SixteenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
-  <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          {contentData.map((item, idx) => {
-            return (
-              <>
-                <MainCcontent>
-                  <LeftContent1>
-                    <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%'/>
-                    {tableData[idx].map((it) => {
-                      if (it.time === timeRange) {
-                        return it.info.map((i) => {
-                          return (
-                            <>
-                              <Arrow content={i.name} key={i.name} isContent={false} width='60%'/>
-                            </>
-                          )
-                        })
-                      } else {
-                        return <></>
-                      }
-                    })}
-                  </LeftContent1>
-                  <RightContent>
-                    <BarEcharts
-                      direction="horizontal"
-                      data={item.series}
-                      xAxisData={item.dataName}
-                      isStack={false}
-                      barWidth={30}
-                      height="240px"
-                    />
-                  </RightContent>
-                </MainCcontent>
-                {
-                idx !== (contentData.length - 1) ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>
+    <LeftContent>
+      <TableWrapper>
+        {contentData.map((item, idx) => (
+          <React.Fragment key={`content-${idx}`}>
+            <MainCcontent>
+              <LeftContent1>
+                <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%'/>
+                {tableData[idx]
+                  .filter(it => it.time === timeRange)
+                  .flatMap((it, tableIdx) =>
+                    it.info.map((i, infoIdx) => (
+                      <React.Fragment key={`info-${idx}-${tableIdx}-${infoIdx}`}>
+                        <Arrow content={i.name} isContent={false} width='60%'/>
+                      </React.Fragment>
+                    ))
+                  )
                 }
-              </>
-            )
-          })}
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-      {
-          yearlyData.map((data, idx) => {
-            const yearData = yearlyChartData(data, tableData[idx])
-            return (<>
-              {idx !== 0 ? <Line margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : <></>}
-              <BarEcharts
-                key = {idx}
-                direction="vertical"
-                data={yearData}
-                xAxisData={[]}
-                isStack={false}
-                barWidth={20}
-                height="250px"
-                legend={true}
-              />
-            </>)
-          })
-        }
-      </MiddleContent>
-    </ContentRable>
-const SeventeenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) => 
+              </LeftContent1>
+              <RightContent>
+                <BarEcharts
+                  direction="horizontal"
+                  data={item.series}
+                  xAxisData={item.dataName}
+                  isStack={false}
+                  barWidth={30}
+                  height="240px"
+                />
+              </RightContent>
+            </MainCcontent>
+            {idx !== (contentData.length - 1) ? <Line key={`line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+          </React.Fragment>
+        ))}
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <React.Fragment key={`yearly-${idx}`}>
+            {idx !== 0 ? <Line key={`yearly-line-${idx}`} margin="15px 3%" color="#dddddd" width='95%' height='2px' /> : null}
+            <BarEcharts
+              key={`yearly-chart-${idx}`}
+              direction="vertical"
+              data={yearData}
+              xAxisData={[]}
+              isStack={false}
+              barWidth={30}
+              height="250px"
+              legend={true}
+            />
+          </React.Fragment>
+        )
+      })}
+    </MiddleContent>
+  </ContentRable>
+
+const SeventeenthChart: React.FC<CustomProps> = ({contentData, tableData, timeRange, yearlyData, yearlyChartData}) =>
   <ContentRable>
-      <LeftContent>
-        <TableWrapper>
-          {contentData.map((item, idx) => {
-            return (
-              <>
-                <MainCcontent>
-                  <LeftContent1>
-                    <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%'/>
-                    {tableData[idx].map((it) => {
-                      if (it.time === timeRange) {
-                        return it.info.map((i) => {
-                          return (
-                            <>
-                              <Arrow content={i.name} key={i.name} isContent={false} width='60%'/>
-                            </>
-                          )
-                        })
-                      } else {
-                        return <></>
-                      }
-                    })}
-                  </LeftContent1>
-                  <RightContent>
-                    <BarEcharts
-                      direction="horizontal"
-                      data={item.series}
-                      xAxisData={item.dataName}
-                      isStack={false}
-                      barWidth={20}
-                      height="250px"
-                    />
-                  </RightContent>
-                </MainCcontent>
-              </>
-            )
-          })}
-        </TableWrapper>
-      </LeftContent>
-      <MiddleContent>
-        {
-          yearlyData.map((data, idx) => {
-            const yearData = yearlyChartData(data, tableData[idx])
-            return (
-              <BarEcharts
-                key = {idx}
-                direction="vertical"
-                data={yearData}
-                xAxisData={[]}
-                isStack={false}
-                barWidth={20}
-                height="250px"
-                legend={true}
-              />
-            )
-          })
-        }
-      </MiddleContent>
-    </ContentRable>
-
-
-
+    <LeftContent>
+      <TableWrapper>
+        {contentData.map((item, idx) => (
+          <React.Fragment key={`content-${idx}`}>
+            <MainCcontent>
+              <LeftContent1>
+                <Arrow content={item.content} backgroundColor="#176CC9" isContent={true} width='100%'/>
+                {tableData?.[idx]
+                  ? tableData[idx]
+                      .filter(it => it.time === timeRange)
+                      .flatMap((it, tableIdx) =>
+                        it.info.map((i, infoIdx) => (
+                          <React.Fragment key={`info-${idx}-${tableIdx}-${infoIdx}`}>
+                            <Arrow content={i.name} isContent={false} width='60%'/>
+                          </React.Fragment>
+                        ))
+                      )
+                  : null
+                }
+              </LeftContent1>
+              <RightContent>
+                <BarEcharts
+                  direction="horizontal"
+                  data={item.series}
+                  xAxisData={item.dataName}
+                  isStack={false}
+                  barWidth={20}
+                  height="250px"
+                />
+              </RightContent>
+            </MainCcontent>
+          </React.Fragment>
+        ))}
+      </TableWrapper>
+    </LeftContent>
+    <MiddleContent>
+      {yearlyData.map((data, idx) => {
+        const yearData = yearlyChartData(data, tableData[idx])
+        return (
+          <BarEcharts
+            key={`bar-${idx}`}
+            direction="vertical"
+            data={yearData}
+            xAxisData={[]}
+            isStack={false}
+            barWidth={30}
+            height="250px"
+            legend={true}
+          />
+        )
+      })}
+    </MiddleContent>
+  </ContentRable>
 
 const Table: React.FC<Props> = ({ timeRange, tableData, contentData, yearlyData, reqType }) => {
   const [currentChartData, setCurrentChartData] = useState<ChartContent[]>(contentData);
