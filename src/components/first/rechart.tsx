@@ -146,7 +146,6 @@ const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  font-family: 'Roboto', 'Open Sans', Arial, Helvetica, sans-serif;
 `
 
 const SidebarHeader = styled.div`

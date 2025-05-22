@@ -238,7 +238,6 @@ const ChartTitle = styled.div`
   font-size: 18px;
   font-weight: bold;
   color: #0A1766;
-  font-family: 'Inter', sans-serif;
 `;
 
 const ChartLegend = styled.div`
